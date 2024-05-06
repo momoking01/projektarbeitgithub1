@@ -4,5 +4,7 @@ import playformInline from "@playform/inline";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [playformInline()]
+  integrations: [playformInline()],
+  site: 'https://momoking1.github.io',
+  base: '/projektarbeitgithub1/',
 });
