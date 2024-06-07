@@ -1,17 +1,79 @@
 ---
 
 ---
-
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro0</h1>
-		<p>hello worlddd</p>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Restaurant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="home">
+        <h1>Welcome to Astro Restaurant</h1>
+        <p>Experience the best dining with us.</p>
+    </section>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Astro Restaurant offers a unique dining experience with exquisite cuisine and a cozy atmosphere.</p>
+    </section>
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-item">
+            <h3>Starter 1</h3>
+            <p>Description of Starter 1</p>
+        </div>
+        <div class="menu-item">
+            <h3>Main Course 1</h3>
+            <p>Description of Main Course 1</p>
+        </div>
+        <div class="menu-item">
+            <h3>Dessert 1</h3>
+            <p>Description of Dessert 1</p>
+        </div>
+    </section>
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-item">
+            <img src="path/to/image1.jpg" alt="Dish 1">
+            <p>Dish 1 Description</p>
+        </div>
+        <div class="gallery-item">
+            <img src="path/to/image2.jpg" alt="Dish 2">
+            <p>Dish 2 Description</p>
+        </div>
+    </section>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Address: 1234 Street Name, City, State, Zip</p>
+        <p>Phone: (123) 456-7890</p>
+        <p>Email: contact@astrorestaurant.com</p>
+        <form action="/submit-form" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+    <footer>
+        <p>&copy; 2024 Astro Restaurant. All rights reserved.</p>
+    </footer>
+</body>
 </html>
