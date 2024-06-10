@@ -42,6 +42,9 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 | `npx eslint .`            | Start eslint                                     |
+| `npm install eslint-plugin-react --save-dev` | install eslint-plugin-react   | 
+| `npm install --save-dev stylelint stylelint-config-standard htmlhint` | install stylelint, htmlhint |  
+
 
 ## 👀 Want to learn more?
 
