@@ -3,7 +3,6 @@ import pluginJs from "@eslint/js";
 import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
 import { fixupConfigRules } from "@eslint/compat";
 
-const unusedVariable = "This is an unused variable"; // Dies ist eine nicht verwendete Variable
 export default [
   { 
     languageOptions: { 
