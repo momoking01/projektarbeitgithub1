@@ -1,9 +1,8 @@
 body {
-    background-image: url(C:\Users\qusai\OneDrive\Bilder/background\image.jpg);
+    background-image: url("C:\Users\qusai\OneDrive\Bilder/background\image.jpg");
     background-size: cover; /* Deckt den gesamten Bereich ab */
     background-position: center; /* Zentriert das Bild */
     background-repeat: no-repeat; /* Verhindert Wiederholung */
-    
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
