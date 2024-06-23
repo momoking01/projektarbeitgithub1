@@ -2,30 +2,28 @@
   "name": "c-users-moham-desktop-projektarbeit1",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "eslint --ext .js,.astro src",
+    "lint:fix": "eslint --fix --ext .js,.astro src"
   },
-  "dependencies": {
+  
+  "devDependencies": {
     "@astrojs/check": "^0.5.10",
     "@playform/inline": "^0.0.2",
     "@storyblok/astro": "^4.0.5",
     "astro": "^4.6.4",
     "react": "^18.3.1",
-    "typescript": "^5.4.5"
-  },
-  "devDependencies": {
-    "@eslint/compat": "^1.0.1",
-    "@eslint/js": "^8.57.0",
     "eslint": "^8.57.0",
-    "eslint-plugin-astro": "^1.2.0",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-react": "^7.34.2",
+    "eslint-plugin-astro": "^1.2.2",
+    "eslint-plugin-jsx-a11y": "^6.9.0",
     "globals": "^15.3.0",
     "htmlhint": "^1.1.4",
     "stylelint": "^16.6.1",
