@@ -63,7 +63,7 @@ footer {
 }
 
 .menu-category {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 50%);
   padding: 20px;
   border-radius: 10px;
   flex: 1 1 200px;
@@ -76,7 +76,7 @@ footer {
   font-weight: bold;
   font-family: 'Playfair Display', serif;
   font-size: 36px;
-  color: #ffffff;
+  color: #fff;
   text-align: center;
 }
 
