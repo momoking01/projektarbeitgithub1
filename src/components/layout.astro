@@ -1,0 +1,32 @@
+---
+
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurante</title>
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}styles.css`} />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href={`${import.meta.env.BASE_URL}`}>Home</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}menu`}>Menu</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}contact`}>Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Restaurante. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

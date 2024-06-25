@@ -1,57 +1,91 @@
 body {
-    background-image: url("C:\Users\qusai\OneDrive\Bilder/background\image.jpg");
-    background-size: cover; /* Deckt den gesamten Bereich ab */
-    background-position: center; /* Zentriert das Bild */
-    background-repeat: no-repeat; /* Verhindert Wiederholung */
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 
 header {
-    background-color: #333;
-    color: white;
-    padding: 1em 0;
-    text-align: center;
+  background: #333;
+  color: #fff;
+  padding: 1em 0;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 
-nav ul li {
-    margin: 0 1em;
+header nav ul li {
+  margin: 0 1em;
 }
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-section {
-    padding: 2em;
-    text-align: center;
-}
-
-.menu-item, .gallery-item {
-    margin: 1em 0;
-}
-
-.gallery-item img {
-    max-width: 100%;
-    height: auto;
+header nav ul li a {
+  color: #fff;
+  text-decoration: none;
 }
 
 footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1em 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1em 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.menu-background {
+  margin: 0;
+  height: 100vh;
+  background-image: url('Menu.imge/image1.jpg');
+  background-size: cover;
+  background-position: center;
+  padding-top: 50px;
+  color: white;
+}
+
+.menu-categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.menu-category {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1 1 200px;
+  max-width: 300px;
+  min-width: 200px;
+
+}
+
+.menu-hidir {
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.contact-background {
+  margin: 0;
+  height: 100vh;
+  background-image: url('Contact.image/image2.png');
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+  color: white;
 }
