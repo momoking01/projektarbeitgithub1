@@ -63,7 +63,7 @@ footer {
 }
 
 .menu-category {
-  background: rgba(0, 0, 0, 50%);
+  background: rgb(0, 0, 0, 50%);
   padding: 20px;
   border-radius: 10px;
   flex: 1 1 200px;
