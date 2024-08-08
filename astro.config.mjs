@@ -7,5 +7,5 @@ export default defineConfig({
       'import.meta.env.BASE_URL': JSON.stringify('/projektarbeitgithub1/'),
     },
   },
-// Weitere Konfigurationen...
+
 });
