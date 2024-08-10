@@ -5,7 +5,7 @@ export default defineConfig({
   base: '',
   vite: {
     define: {
-      'import.meta.env.BASE_URL': JSON.stringify('/projektarbeitgithub1/'),
+      'import.meta.env.BASE_URL': JSON.stringify('/restaurante/'),
     },
   },
 
