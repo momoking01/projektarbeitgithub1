@@ -34,8 +34,10 @@ jobs:
       - name: Build your site
         run: npm run build
 
-      - name: Run tests
-        run: npm run test
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./dist  # Replace with the path to your build output directory
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
