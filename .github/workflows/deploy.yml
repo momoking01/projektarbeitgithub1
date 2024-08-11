@@ -16,8 +16,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Change directory to project root
-        run: cd ${{ github.workspace }}
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
