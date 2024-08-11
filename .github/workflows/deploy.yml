@@ -16,15 +16,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          path: ./ # Setzt das Repository direkt ins Arbeitsverzeichnis
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '20'
       - name: Install dependencies
         run: npm install
-        working-directory: ./
+        working-directory: ./ # Sicherstellen, dass das Verzeichnis korrekt gesetzt ist
 
   build:
     needs: setup
@@ -32,10 +30,10 @@ jobs:
     steps:
       - name: Run linting
         run: npm run lint
-        working-directory: ./
+        working-directory: ./ # Sicherstellen, dass das Verzeichnis korrekt gesetzt ist
       - name: Build your site
         run: npm run build
-        working-directory: ./
+        working-directory: ./ # Sicherstellen, dass das Verzeichnis korrekt gesetzt ist
 
   test:
     needs: build
@@ -43,7 +41,7 @@ jobs:
     steps:
       - name: Run tests
         run: npm run test
-        working-directory: ./
+        working-directory: ./ # Sicherstellen, dass das Verzeichnis korrekt gesetzt ist
 
   deploy:
     needs: [build, test]
