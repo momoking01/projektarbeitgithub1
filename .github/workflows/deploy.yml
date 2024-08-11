@@ -16,34 +16,34 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          path: ./ # Setzt das Repository direkt ins Arbeitsverzeichnis
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '20'
       - name: Install dependencies
         run: npm install
+        working-directory: ./
 
   build:
     needs: setup
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./ # Setzt das Arbeitsverzeichnis für alle Schritte in diesem Job
     steps:
       - name: Run linting
         run: npm run lint
+        working-directory: ./
       - name: Build your site
         run: npm run build
+        working-directory: ./
 
   test:
     needs: build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./ # Setzt das Arbeitsverzeichnis für alle Schritte in diesem Job
     steps:
       - name: Run tests
         run: npm run test
+        working-directory: ./
 
   deploy:
     needs: [build, test]
@@ -51,9 +51,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    defaults:
-      run:
-        working-directory: ./ # Setzt das Arbeitsverzeichnis für alle Schritte in diesem Job
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
