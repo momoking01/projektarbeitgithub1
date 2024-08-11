@@ -39,25 +39,12 @@ jobs:
           echo "Checking dist directory..."
           ls -al ./dist
           echo "Contents of dist directory listed above."
-      
-      - name: Verify current directory
-        run: |
-          echo "Current directory:"
-          pwd
 
-      - name: List all files in workspace
-        run: |
-          echo "Listing all files in workspace:"
-          find ${{ github.workspace }} -type f
-
-      - name: Upload artifact
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: build-output
+          name: github-pages
           path: ./dist
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: build-output
-        if: success()
