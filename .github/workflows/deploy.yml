@@ -41,10 +41,13 @@ jobs:
           echo "Contents of dist directory listed above."
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
-          path: ./dist  # Verzeichnis mit den gebauten Dateien
+          name: build-output
+          path: ./dist
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: build-output
         if: success()
