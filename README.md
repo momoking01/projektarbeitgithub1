@@ -19,16 +19,33 @@ Inside of your Astro project, you'll see the following folders and files:
 ```text
 /
 ├── public/
-│   └── favicon.svg
+│   ├── Contact.image
+│   ├── favicon.svg
+│   ├── image1.png
+│   ├── image2.png
+│   ├── image.jpg
+│   └── image.svg
 ├── src/
 │   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+│   │   ├── card.astro
+│   │   ├── layout.astro
+│   │   └── menu.astro
+│   ├── pages/
+│   │   ├── contact.astro
+│   │   ├── index.astro
+│   └── layouts/
+│       └── layout.astro
+├── tests/
+│   ├── example.spec.ts
+│   └── tests-examples/
+│       ├── ts demo-todo-app.spec.ts
+├── .gitignore
+├── astro.config.mjs
+├── eslint.config.js
+├── package-lock.json
+├── package.json
+└── tsconfig.json
+
 
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
@@ -40,18 +57,21 @@ Any static assets, like images, can be placed in the `public/` directory.
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm install -g astro`             | Installs dependencies global                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm install --save-dev eslint eslint-plugin-astro` | Installs EsLint                     |
-| `npm install --save-dev postcss-html stylelint-config-html` | Installs StyleLint                     |
+| Command                           | Action                                           |
+| :----------------------------     | :----------------------------------------------- |
+| npm install                       | Installs dependencies                            |
+| npm install -g astro              | Installs dependencies global                     |
+| npm run dev                       | Starts local dev server at localhost:4321        |
+| npm run build                     | Build your production site to ./dist/            |
+| npm run preview                   | Preview your build locally, before deploying     |
+| npm run astro ...                 | Run CLI commands like astro add, astro check     |
+| npm run astro -- --help           | Get help using the Astro CLI                     |
+| npm install --save-dev              
+  eslint eslint-plugin-astro        | Installs EsLint                                  |
+| npm install --save-dev          
+  postcss-html stylelint-config-html| Installs StyleLint                               |
 
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+🌐 View the Project Live:(https://momoking01.github.io/projektarbeitgithub1/)
