@@ -34,10 +34,13 @@ jobs:
       - name: Build your site
         run: npm run build
 
+      - name: List build directory
+        run: ls -al ./dist  # Überprüft, ob das dist-Verzeichnis existiert und die erwarteten Dateien enthält
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./dist  # Replace with the path to your build output directory
+          path: ./dist  # Verzeichnis mit den gebauten Dateien
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
