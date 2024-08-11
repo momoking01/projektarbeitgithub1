@@ -11,45 +11,28 @@ permissions:
   id-token: write
 
 jobs:
-  setup:
+  build_test_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '20'
+
       - name: Install dependencies
         run: npm install
-        working-directory: ./ # Sicherstellen, dass das Verzeichnis korrekt gesetzt ist
 
-  build:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
       - name: Run linting
         run: npm run lint
-        working-directory: ./ # Sicherstellen, dass das Verzeichnis korrekt gesetzt ist
+
       - name: Build your site
         run: npm run build
-        working-directory: ./ # Sicherstellen, dass das Verzeichnis korrekt gesetzt ist
 
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Run tests
         run: npm run test
-        working-directory: ./ # Sicherstellen, dass das Verzeichnis korrekt gesetzt ist
 
-  deploy:
-    needs: [build, test]
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
