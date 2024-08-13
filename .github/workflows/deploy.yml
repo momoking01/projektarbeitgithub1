@@ -13,6 +13,9 @@ permissions:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,13 +35,8 @@ jobs:
         run: npm run lint
 
       - name: Build your site
-        run: npm run build
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: github-pages
-          path: ./dist
-
+        uses: withastro/action@v2
+       
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
