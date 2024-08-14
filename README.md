@@ -20,7 +20,7 @@ Inside of this Astro project, you'll see the following folders and files:
 /
 ├──.github/workflows/
 |   └── deploy.yml
-├──.github/workflows/
+├──.vscode
 |   ├── extensions.json
 |   └── launch.json
 ├── public/
@@ -78,4 +78,4 @@ All commands are run from the root of the project, from a terminal:
 
 
 
-### 🌐 View the Project Live:(https://momoking01.github.io/projektarbeitgithub1/)
+# 🌐 View the Project Live: (https://momoking01.github.io/projektarbeitgithub1/)
