@@ -12,46 +12,51 @@ npm create astro@latest -- --template basics
 
 ![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
 
-## 🚀 Project Structure
+## 🚀 Project Structure 
 
-Inside of your Astro project, you'll see the following folders and files:
+Inside of this Astro project, you'll see the following folders and files:
 
 ```text
 /
+├──.github/workflows/
+|   └── deploy.yml
+├──.github/workflows/
+|   ├── extensions.json
+|   └── launch.json
 ├── public/
-│   ├── Contact.image
+|   ├── Contact.image/
+|         └── image2.png
+│   ├── Menu.image/
+|         └── image1.png
 │   ├── favicon.svg
-│   ├── image1.png
-│   ├── image2.png
 │   ├── image.jpg
-│   └── image.svg
+|   ├── index.css
+│   └── styles.css
 ├── src/
 │   ├── components/
 │   │   ├── card.astro
-│   │   ├── layout.astro
-│   │   └── menu.astro
+│   │   └── layout.astro
 │   ├── pages/
 │   │   ├── contact.astro
 │   │   ├── index.astro
-│   └── layouts/
-│       └── layout.astro
+│   │   ├── index.js
+|   |   └── menu.astro
+│   └── env.d.ts
 ├── tests/
-│   ├── example.spec.ts
-│   └── tests-examples/
-│       ├── ts demo-todo-app.spec.ts
+│   └── example.spec.ts
+├── tests-examples/
+│   └── ts demo-todo-app.spec.ts
 ├── .gitignore
 ├── astro.config.mjs
 ├── eslint.config.js
 ├── package-lock.json
 ├── package.json
+├── playwright.config.ts
+├── README.md
+├── stylelint.config.cjs
 └── tsconfig.json
 
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
 
 ## 🧞 Commands
 
@@ -66,12 +71,11 @@ All commands are run from the root of the project, from a terminal:
 | npm run preview                   | Preview your build locally, before deploying     |
 | npm run astro ...                 | Run CLI commands like astro add, astro check     |
 | npm run astro -- --help           | Get help using the Astro CLI                     |
-| npm install --save-dev              
-  eslint eslint-plugin-astro        | Installs EsLint                                  |
-| npm install --save-dev          
-  postcss-html stylelint-config-html| Installs StyleLint                               |
+| npm install --save-dev            |                                                  |
+| eslint eslint-plugin-astro        | Installs EsLint                                  |
+| npm install --save-dev            |                                                  |
+| postcss-html stylelint-config-html| Installs StyleLint                               |
 
-## 👀 Want to learn more?
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-🌐 View the Project Live:(https://momoking01.github.io/projektarbeitgithub1/)
+
+### 🌐 View the Project Live:(https://momoking01.github.io/projektarbeitgithub1/)
