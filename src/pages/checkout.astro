@@ -4,77 +4,52 @@ import Layout from "../components/layout.astro";
 
 <Layout>
   <div class="checkout-container">
-    <h1>🛒 Checkout</h1>
-    <h2>Order Summary</h2>
-    <ul id="order-summary"></ul>
-    <p><strong>Total Price:</strong> €<span id="total-price">0.00</span></p>
+    <h1>Checkout</h1>
+    <p><strong>Total Items:</strong> <span id="total-items">0</span></p>
 
-    <h2>Choose Payment Method</h2>
+    <h2>Payment Method</h2>
     <select id="payment-method">
-      <option value="cash">Cash Payment</option>
+      <option value="cash">Cash</option>
       <option value="sepa">SEPA Direct Debit</option>
     </select>
 
-    <div id="sepa-form" style="display: none;">
-      <h3>SEPA Payment Details</h3>
-      <label for="iban">IBAN:</label>
-      <input id="iban" placeholder="DE89 3704 0044 0532 0130 00" type="text">
-      <label for="account-name">Account Holder Name:</label>
-      <input id="account-name" placeholder="John Doe" type="text">
-    </div>
-
-    <button onclick="completeOrder()">Complete Order</button>
+    <button onclick="placeOrder()">Place Order</button>
   </div>
 </Layout>
 
 <script>
-  function loadCheckout() {
+  function loadCartSummary() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let orderSummary = document.getElementById("order-summary");
-    let totalPriceElement = document.getElementById("total-price");
-    orderSummary.innerHTML = "";
-
-    let total = 0;
-    cart.forEach(item => {
-      total += item.quantity * 5; // Preis simulieren (€5 pro Produkt)
-      let li = document.createElement("li");
-      li.textContent = `${item.quantity}x ${item.name}`;
-      orderSummary.appendChild(li);
-    });
-
-    totalPriceElement.textContent = total.toFixed(2);
+    let totalItems = document.getElementById("total-items");
+    let totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    totalItems.textContent = totalCount;
   }
 
-  function completeOrder() {
+  function placeOrder() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     if (cart.length === 0) {
-      alert("Your cart is empty!");
+      alert("Your cart is empty.");
       return;
     }
 
     let paymentMethod = document.getElementById("payment-method").value;
-    let order = {
-      id: Date.now(),
-      date: new Date().toLocaleString(),
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    let newOrder = {
+      date: new Date().toISOString(),
       items: cart,
-      total: document.getElementById("total-price").textContent,
-      payment: paymentMethod,
-      status: paymentMethod === "cash" ? "Pending" : "Paid"
+      payment: paymentMethod
     };
 
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
-    orders.push(order);
+    orders.push(newOrder);
     localStorage.setItem("orders", JSON.stringify(orders));
     localStorage.removeItem("cart");
+
     alert("Order placed successfully!");
     window.location.href = "/projektarbeitgithub1/orders";
   }
 
-  document.getElementById("payment-method").addEventListener("change", function() {
-    document.getElementById("sepa-form").style.display = this.value === "sepa" ? "block" : "none";
-  });
-
-  window.onload = loadCheckout;
+  window.onload = loadCartSummary;
 </script>
 
 <style>
@@ -83,13 +58,8 @@ import Layout from "../components/layout.astro";
     padding: 20px;
   }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  input, select, button {
+  select, button {
     margin: 10px;
-    padding: 8px;
+    padding: 5px;
   }
 </style>
