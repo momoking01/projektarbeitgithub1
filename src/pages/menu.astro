@@ -3,8 +3,9 @@ import Layout from "../components/layout.astro";
 ---
 
 <Layout>
-  <div class="menu-background" style="background-size: cover;">
-    <h1 class="menu-hidir">Menu</h1>
+  <section class="menu-container">
+    <h1>Menu</h1>
+
     <div class="menu-categories">
       <div class="menu-category">
         <h2>Pizzas</h2>
@@ -14,6 +15,7 @@ import Layout from "../components/layout.astro";
           <li>Pizza Quattro Stagioni <button onclick="addToCart('Pizza Quattro Stagioni')">Add to Cart</button></li>
         </ul>
       </div>
+
       <div class="menu-category">
         <h2>Salads</h2>
         <ul>
@@ -22,26 +24,52 @@ import Layout from "../components/layout.astro";
           <li>Caprese Salad <button onclick="addToCart('Caprese Salad')">Add to Cart</button></li>
         </ul>
       </div>
+
       <div class="menu-category">
         <h2>Admin Products</h2>
-        <ul id="admin-products"></ul>
+        <ul id="admin-products-list"></ul>
       </div>
     </div>
-  </div>
+  </section>
 </Layout>
 
 <script>
+  function addToCart(productName) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let existingProduct = cart.find(item => item.name === productName);
+    if (existingProduct) {
+      existingProduct.quantity += 1; // Menge erhöhen, wenn Produkt schon drin ist
+    } else {
+      cart.push({ name: productName, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`${productName} added to cart!`);
+  }
+
   function loadAdminProducts() {
     let products = JSON.parse(localStorage.getItem("products")) || [];
-    let productList = document.getElementById("admin-products");
-    productList.innerHTML = "";
+    let adminProductsList = document.getElementById("admin-products-list");
+    adminProductsList.innerHTML = "";
 
     products.forEach(product => {
       let li = document.createElement("li");
       li.innerHTML = `${product} <button onclick="addToCart('${product}')">Add to Cart</button>`;
-      productList.appendChild(li);
+      adminProductsList.appendChild(li);
     });
   }
 
   window.onload = loadAdminProducts;
 </script>
+
+<style>
+  .menu-container {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .menu-category {
+    margin-bottom: 20px;
+  }
+</style>

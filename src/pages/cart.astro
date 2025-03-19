@@ -1,0 +1,100 @@
+---
+import Layout from "../components/layout.astro";
+---
+
+<Layout>
+  <div class="cart-container">
+    <h1>🛒 Shopping Cart</h1>
+    <ul id="cart-list"></ul>
+    <p><strong>Total Items:</strong> <span id="total-items">0</span></p>
+    <button onclick="clearCart()">Clear Cart</button>
+  </div>
+
+  <!-- Dummy-Element für Stylelint -->
+  <ul style="display: none;">
+    <li></li>
+  </ul>
+</Layout>
+
+
+<script>
+  function loadCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartList = document.getElementById("cart-list");
+    let totalItems = document.getElementById("total-items");
+    cartList.innerHTML = "";
+
+    let totalCount = 0;
+
+    cart.forEach((item, index) => {
+      totalCount += item.quantity;
+      let li = document.createElement("li");
+      li.innerHTML = `
+        ${item.name} - <strong>${item.quantity}</strong>
+        <button onclick="increaseQuantity(${index})">+</button>
+        <button onclick="decreaseQuantity(${index})">-</button>
+        <button onclick="removeFromCart(${index})">Remove</button>
+      `;
+      cartList.appendChild(li);
+    });
+
+    totalItems.textContent = totalCount;
+  }
+
+  function increaseQuantity(index) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart[index].quantity += 1;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+  }
+
+  function decreaseQuantity(index) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (cart[index].quantity > 1) {
+      cart[index].quantity -= 1;
+    } else {
+      cart.splice(index, 1); // Wenn Menge 1 ist und verringert wird → Produkt löschen
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+  }
+
+  function removeFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+  }
+
+  function clearCart() {
+    localStorage.removeItem("cart");
+    loadCart();
+  }
+
+  window.onload = loadCart;
+</script>
+
+<style>
+  .cart-container {
+    text-align: center;
+    padding: 20px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  /* stylelint-disable-next-line astro/no-unused-css-selector */
+  li {
+    margin: 10px 0;
+    font-size: 1.2em;
+  }
+
+  button {
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+  }
+</style>
+
