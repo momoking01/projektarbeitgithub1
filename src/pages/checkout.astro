@@ -7,6 +7,9 @@ import Layout from "../components/layout.astro";
     <h1>Checkout</h1>
     <p><strong>Total Items:</strong> <span id="total-items">0</span></p>
 
+    <h2>Order Summary</h2>
+    <ul id="order-summary"></ul>
+
     <h2>Payment Method</h2>
     <select id="payment-method">
       <option value="cash">Cash</option>
@@ -21,7 +24,18 @@ import Layout from "../components/layout.astro";
   function loadCartSummary() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let totalItems = document.getElementById("total-items");
-    let totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    let orderSummary = document.getElementById("order-summary");
+
+    let totalCount = 0;
+    orderSummary.innerHTML = "";
+
+    cart.forEach(item => {
+      totalCount += item.quantity;
+      let li = document.createElement("li");
+      li.textContent = `${item.name} (x${item.quantity})`;
+      orderSummary.appendChild(li);
+    });
+
     totalItems.textContent = totalCount;
   }
 

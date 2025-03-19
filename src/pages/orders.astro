@@ -7,10 +7,6 @@ import Layout from "../components/layout.astro";
     <h1>Order History</h1>
     <ul class="orders-list" id="orders-list"></ul>
   </div>
-
-  <!-- Dummy-Elemente für Stylelint, um die Klassen als benutzt zu markieren -->
-  <div class="order-item" style="display: none;"></div>
-  <div class="order-item-detail" style="display: none;"></div>
 </Layout>
 
 <script>
@@ -26,13 +22,11 @@ import Layout from "../components/layout.astro";
 
     orders.forEach((order, index) => {
       let li = document.createElement("li");
-      li.classList.add("order-item");
-      li.innerHTML = `<strong>Order ${index + 1}</strong> - ${new Date(order.date).toLocaleString()}`;
+      li.innerHTML = `<strong>Order ${index + 1}</strong> - ${new Date(order.date).toLocaleString()} - Payment: ${order.payment}`;
 
       let itemsList = document.createElement("ul");
       order.items.forEach(item => {
         let itemLi = document.createElement("li");
-        itemLi.classList.add("order-item-detail");
         itemLi.textContent = `${item.name} (x${item.quantity})`;
         itemsList.appendChild(itemLi);
       });
@@ -54,18 +48,5 @@ import Layout from "../components/layout.astro";
   .orders-list {
     list-style-type: none;
     padding: 0;
-  }
-
-  /* Klassen werden nun auch im statischen HTML referenziert */
-  .order-item {
-    margin: 10px 0;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-
-  .order-item-detail {
-    margin-left: 20px;
-    font-size: 0.9em;
-    color: #555;
   }
 </style>
