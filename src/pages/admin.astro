@@ -1,0 +1,88 @@
+---
+import Layout from "../components/layout.astro";
+---
+
+<Layout>
+  <div class="admin-container">
+    <h1>Admin Panel</h1>
+    <p>Only admins can access this page.</p>
+
+    <div id="admin-controls" style="display: none;">
+      <h2>Add Product</h2>
+      <input type="text" id="product-name" placeholder="Product Name">
+      <button onclick="addProduct()">Add</button>
+
+      <h2>Remove Product</h2>
+      <ul id="product-list"></ul>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function checkAdminAccess() {
+    let role = localStorage.getItem("userRole");
+    if (role !== "admin") {
+      alert("Access denied. Admins only.");
+      window.location.href = "/";
+    } else {
+      document.getElementById("admin-controls").style.display = "block";
+      loadProducts();
+    }
+  }
+
+  function addProduct() {
+    let productName = document.getElementById("product-name").value;
+    if (!productName) {
+      alert("Please enter a product name.");
+      return;
+    }
+
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    products.push(productName);
+    localStorage.setItem("products", JSON.stringify(products));
+    loadProducts();
+  }
+
+  function loadProducts() {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let productList = document.getElementById("product-list");
+    productList.innerHTML = "";
+
+    products.forEach((product, index) => {
+      let li = document.createElement("li");
+      li.textContent = product;
+
+      let removeBtn = document.createElement("button");
+      removeBtn.textContent = "Remove";
+      removeBtn.onclick = function() {
+        removeProduct(index);
+      };
+
+      li.appendChild(removeBtn);
+      productList.appendChild(li);
+    });
+  }
+
+  function removeProduct(index) {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    products.splice(index, 1);
+    localStorage.setItem("products", JSON.stringify(products));
+    loadProducts();
+  }
+
+  window.onload = checkAdminAccess;
+</script>
+
+<style>
+  .admin-container {
+    text-align: center;
+    padding: 20px;
+  }
+  .admin-container input {
+    margin: 10px;
+  }
+  .admin-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+</style>

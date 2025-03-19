@@ -1,0 +1,57 @@
+---
+import Layout from "../components/layout.astro";
+import { useState, useEffect } from "react";
+---
+
+<Layout>
+  <div class="orders-container">
+    <h1>Order History</h1>
+    <ul id="orders-list"></ul>
+  </div>
+</Layout>
+
+<script>
+  function loadOrders() {
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+    let ordersList = document.getElementById("orders-list");
+    ordersList.innerHTML = "";
+
+    if (orders.length === 0) {
+      ordersList.innerHTML = "<p>No previous orders.</p>";
+      return;
+    }
+
+    orders.forEach((order, index) => {
+      let li = document.createElement("li");
+      li.innerHTML = `<strong>Order ${index + 1}</strong> - ${new Date(order.date).toLocaleString()}`;
+
+      let itemsList = document.createElement("ul");
+      order.items.forEach(item => {
+        let itemLi = document.createElement("li");
+        itemLi.textContent = item;
+        itemsList.appendChild(itemLi);
+      });
+
+      li.appendChild(itemsList);
+      ordersList.appendChild(li);
+    });
+  }
+
+  window.onload = loadOrders;
+</script>
+
+<style>
+  .orders-container {
+    text-align: center;
+    padding: 20px;
+  }
+  .orders-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  .orders-container li {
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+</style>

@@ -1,44 +1,37 @@
 ---
 import Layout from "../components/layout.astro";
+import { useState, useEffect } from "react";
 ---
 
 <Layout>
   <div class="menu-background" style="background-size: cover;">
     <h1 class="menu-hidir">Menu</h1>
-    <p></p>
     <div class="menu-categories">
       <div class="menu-category">
         <h2>Pizzas</h2>
         <ul>
-          <li>Pizza Margherita</li>
-          <li>Pizza Pepperoni</li>
-          <li>Pizza Quattro Stagioni</li>
+          <li>Pizza Margherita <button onclick="addToCart('Pizza Margherita')">Add to Cart</button></li>
+          <li>Pizza Pepperoni <button onclick="addToCart('Pizza Pepperoni')">Add to Cart</button></li>
+          <li>Pizza Quattro Stagioni <button onclick="addToCart('Pizza Quattro Stagioni')">Add to Cart</button></li>
         </ul>
       </div>
       <div class="menu-category">
         <h2>Salads</h2>
         <ul>
-          <li>Caesar Salad</li>
-          <li>Greek Salad</li>
-          <li>Caprese Salad</li>
-        </ul>
-      </div>
-      <div class="menu-category">
-        <h2>Pasta</h2>
-        <ul>
-          <li>Pasta Carbonara</li>
-          <li>Pasta Bolognese</li>
-          <li>Spaghetti Aglio e Olio</li>
-        </ul>
-      </div>
-      <div class="menu-category">
-        <h2>Soft Drinks</h2>
-        <ul>
-          <li>Soft Drink Cola</li>
-          <li>Soft Drink Lemonade</li>
-          <li>Soft Drink Iced Tea</li>
+          <li>Caesar Salad <button onclick="addToCart('Caesar Salad')">Add to Cart</button></li>
+          <li>Greek Salad <button onclick="addToCart('Greek Salad')">Add to Cart</button></li>
+          <li>Caprese Salad <button onclick="addToCart('Caprese Salad')">Add to Cart</button></li>
         </ul>
       </div>
     </div>
   </div>
 </Layout>
+
+<script>
+  function addToCart(item) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push(item);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`${item} added to cart!`);
+  }
+</script>

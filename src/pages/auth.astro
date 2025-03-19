@@ -1,0 +1,43 @@
+---
+import Layout from "../components/layout.astro";
+---
+
+<Layout>
+  <div class="auth-container">
+    <h1>Login</h1>
+    <label for="role">Choose your role:</label>
+    <select id="role">
+      <option value="client">Client</option>
+      <option value="admin">Admin</option>
+    </select>
+    <button onclick="setUserRole()">Login</button>
+  </div>
+</Layout>
+
+<script>
+  function setUserRole() {
+    let role = document.getElementById("role").value;
+    localStorage.setItem("userRole", role);
+    alert(`Logged in as ${role}`);
+    window.location.href = "/"; // Zurück zur Startseite
+  }
+
+  function checkUserRole() {
+    let role = localStorage.getItem("userRole");
+    if (role) {
+      alert(`You are logged in as ${role}`);
+    }
+  }
+
+  window.onload = checkUserRole;
+</script>
+
+<style>
+  .auth-container {
+    text-align: center;
+    padding: 20px;
+  }
+  .auth-container select, .auth-container button {
+    margin: 10px;
+  }
+</style>
