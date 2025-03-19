@@ -9,7 +9,7 @@ import Layout from "../components/layout.astro";
   </div>
 </Layout>
 
-<script>
+<script is:inline>
   function loadOrders() {
     let orders = JSON.parse(localStorage.getItem("orders")) || [];
     let ordersList = document.getElementById("orders-list");

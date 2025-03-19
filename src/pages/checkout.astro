@@ -20,7 +20,7 @@ import Layout from "../components/layout.astro";
   </div>
 </Layout>
 
-<script>
+<script is:inline>
   function loadCartSummary() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let totalItems = document.getElementById("total-items");
