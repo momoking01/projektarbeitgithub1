@@ -16,10 +16,15 @@ import Layout from "../components/layout.astro";
 
 <script is:inline>
   function setUserRole() {
-    let role = document.getElementById("role").value;
-    localStorage.setItem("userRole", role);
-    alert(`Logged in as ${role}`);
-    window.location.href = "/"; // Zurück zur Startseite
+      let role = document.getElementById("role").value;
+      localStorage.setItem("userRole", role);
+      alert(`Logged in as ${role}`);
+
+      if (role === "admin") {
+          window.location.href = "/projektarbeitgithub1/admin"; // Admin geht zum Admin-Panel
+      } else {
+          window.location.href = "/projektarbeitgithub1/"; // Andere Nutzer gehen zur Startseite
+      }
   }
 
   function checkUserRole() {
