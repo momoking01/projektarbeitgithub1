@@ -33,7 +33,7 @@ import Layout from "../components/layout.astro";
       order.items.forEach(item => {
         let itemLi = document.createElement("li");
         itemLi.classList.add("order-item-detail");
-        itemLi.textContent = item;
+        itemLi.textContent = `${item.name} (x${item.quantity})`;
         itemsList.appendChild(itemLi);
       });
 
