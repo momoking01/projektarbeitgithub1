@@ -16,8 +16,7 @@ import Layout from "../components/layout.astro";
   </ul>
 </Layout>
 
-
-<script>
+<script is:inline>
   function loadCart() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let cartList = document.getElementById("cart-list");
@@ -97,4 +96,3 @@ import Layout from "../components/layout.astro";
     cursor: pointer;
   }
 </style>
-

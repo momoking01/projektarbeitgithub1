@@ -33,13 +33,13 @@ import Layout from "../components/layout.astro";
   </section>
 </Layout>
 
-<script>
+<script is:inline>
   function addToCart(productName) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     let existingProduct = cart.find(item => item.name === productName);
     if (existingProduct) {
-      existingProduct.quantity += 1; // Menge erhöhen, wenn Produkt schon drin ist
+      existingProduct.quantity += 1; // Menge erhöhen, wenn Produkt bereits existiert
     } else {
       cart.push({ name: productName, quantity: 1 });
     }
@@ -71,5 +71,10 @@ import Layout from "../components/layout.astro";
 
   .menu-category {
     margin-bottom: 20px;
+  }
+
+  button {
+    cursor: pointer;
+    padding: 5px;
   }
 </style>
