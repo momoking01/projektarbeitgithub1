@@ -77,5 +77,14 @@ All commands are run from the root of the project, from a terminal:
 | postcss-html stylelint-config-html| Installs StyleLint                               |
 
 
+| programm lokal testen                                                                | 
+| :----------------------------------------------------------------------------------- | 
+| npm run lint                                                                         | 
+| npx playwright install --with-deps --> (install playwright browser)                  | 
+| npm run test                                                                         |
+| npx playwright show-trace test-results/example-navigation-to-menu-chromium/trace.zip |
+| npx playwright test --ui                                                             |
+
+
 
 # 🌐 View the Project Live: (https://momoking01.github.io/projektarbeitgithub1/)
