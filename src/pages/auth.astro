@@ -10,11 +10,11 @@ import Layout from "../components/layout.astro";
       <option value="client">Client</option>
       <option value="admin">Admin</option>
     </select>
-    <button onclick="setUserRole()">Login</button>
+    <button id="loginButton">Login</button>
   </div>
 </Layout>
 
-<script>
+<script is:inline>
   function setUserRole() {
     let role = document.getElementById("role").value;
     localStorage.setItem("userRole", role);
@@ -30,6 +30,11 @@ import Layout from "../components/layout.astro";
   }
 
   window.onload = checkUserRole;
+
+  // Button-EventListener hinzufügen (empfohlene Methode)
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("loginButton").addEventListener("click", setUserRole);
+  });
 </script>
 
 <style>
