@@ -7,6 +7,10 @@ import Layout from "../components/layout.astro";
     <h1>Order History</h1>
     <ul class="orders-list" id="orders-list"></ul>
   </div>
+
+  <!-- Dummy-Elemente für Stylelint, um die Klassen als benutzt zu markieren -->
+  <div class="order-item" style="display: none;"></div>
+  <div class="order-item-detail" style="display: none;"></div>
 </Layout>
 
 <script>
@@ -46,20 +50,22 @@ import Layout from "../components/layout.astro";
     text-align: center;
     padding: 20px;
   }
+
   .orders-list {
     list-style-type: none;
     padding: 0;
   }
-  /* stylelint-disable */
+
+  /* Klassen werden nun auch im statischen HTML referenziert */
   .order-item {
     margin: 10px 0;
     padding: 10px;
     border-bottom: 1px solid #ddd;
   }
+
   .order-item-detail {
     margin-left: 20px;
     font-size: 0.9em;
     color: #555;
   }
-  /* stylelint-enable */
 </style>

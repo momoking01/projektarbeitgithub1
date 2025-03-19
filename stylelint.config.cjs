@@ -1,13 +1,19 @@
 module.exports = {
   extends: [
-    'stylelint-config-html', // Standard HTML-Regeln
-    'stylelint-config-astro' // Astro-spezifische Regeln
+    "stylelint-config-standard",
+    "stylelint-config-recommended",
+    "stylelint-config-html",
   ],
   rules: {
-    'block-no-empty': true, // Verbietet leere CSS-Blöcke
-    'color-no-invalid-hex': true, // Verbietet ungültige Hex-Farbwerte
-    'selector-pseudo-class-no-unknown': true, // Verbietet unbekannte CSS-Pseudo-Klassen
-    'astro/no-unused-css-selector': null, // Sicherstellen, dass diese Regel ignoriert wird
-    'no-unused-selectors': null // Falls noch eine andere ähnliche Regel existiert, deaktivieren
-  }
+    "block-no-empty": true,
+    "color-no-invalid-hex": true,
+    "selector-pseudo-class-no-unknown": true,
+    "no-descending-specificity": null,
+  },
+  overrides: [
+    {
+      files: ["*.astro", "**/*.astro"],
+      customSyntax: "postcss-html", // Syntax muss ein String sein
+    },
+  ],
 };

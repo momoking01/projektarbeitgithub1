@@ -16,8 +16,8 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:4321',
-    trace: 'on',  // Trace-Aufzeichnung immer aktivieren
+    baseURL: 'http://localhost:4321/projektarbeitgithub1/',
+    trace: 'on',
   },
   projects: [
     {
