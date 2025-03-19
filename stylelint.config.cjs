@@ -7,6 +7,6 @@ module.exports = {
     'block-no-empty': true, // Verbietet leere CSS-Blöcke
     'color-no-invalid-hex': true, // Verbietet ungültige Hex-Farbwerte
     'selector-pseudo-class-no-unknown': true, // Verbietet unbekannte CSS-Pseudo-Klassen
-    'astro/no-unused-css-selector': null // Deaktiviert die Fehlerprüfung für ungenutzte Selektoren
+    'astro/no-unused-css-selector': [null, { severity: "warning" }] // Sicherstellen, dass es ignoriert wird
   }
 };
