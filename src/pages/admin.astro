@@ -31,17 +31,25 @@ import Layout from "../components/layout.astro";
   }
 
   function addProduct() {
-    let productName = document.getElementById("product-name").value;
-    if (!productName) {
-      alert("Please enter a product name.");
-      return;
-    }
+      let productName = document.getElementById("product-name").value.trim();
+      if (!productName) {
+          alert("Please enter a product name.");
+          return;
+      }
 
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-    products.push(productName);
-    localStorage.setItem("products", JSON.stringify(products));
-    loadProducts();
+      let products = JSON.parse(localStorage.getItem("products")) || [];
+
+      // Überprüfen, ob das Produkt bereits existiert
+      if (products.includes(productName)) {
+          alert("Product already exists!");
+          return;
+      }
+
+      products.push(productName);
+      localStorage.setItem("products", JSON.stringify(products));
+      loadProducts();
   }
+
 
   function loadProducts() {
     let products = JSON.parse(localStorage.getItem("products")) || [];
