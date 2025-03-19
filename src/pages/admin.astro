@@ -10,7 +10,7 @@ import Layout from "../components/layout.astro";
     <div id="admin-controls" style="display: none;">
       <h2>Add Product</h2>
       <input id="product-name" placeholder="Product Name" type="text">
-      <button onclick="addProduct()">Add</button>
+      <button id="addProductButton">Add</button>
 
       <h2>Remove Product</h2>
       <ul id="product-list"></ul>
@@ -18,12 +18,12 @@ import Layout from "../components/layout.astro";
   </div>
 </Layout>
 
-<script>
+<script is:inline>
   function checkAdminAccess() {
     let role = localStorage.getItem("userRole");
     if (role !== "admin") {
       alert("Access denied. Admins only.");
-      window.location.href = "/";
+      window.location.href = "/projektarbeitgithub1/";
     } else {
       document.getElementById("admin-controls").style.display = "block";
       loadProducts();
@@ -70,7 +70,12 @@ import Layout from "../components/layout.astro";
     loadProducts();
   }
 
-  window.onload = checkAdminAccess;
+  window.onload = function () {
+    checkAdminAccess();
+
+    // **EventListener für den Add-Button hinzufügen**
+    document.getElementById("addProductButton").addEventListener("click", addProduct);
+  };
 </script>
 
 <style>
