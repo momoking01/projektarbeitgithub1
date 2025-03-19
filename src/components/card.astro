@@ -3,7 +3,7 @@ const { title, description, imageUrl } = Astro.props;
 ---
 
 <article class="card">
-  <img src={imageUrl} alt={title} />
+  <img alt={title} src={imageUrl} />
   <h2>{title}</h2>
   <p>{description}</p>
 </article>
