@@ -29,7 +29,7 @@ app.use(
                 callback(new Error("Not allowed by CORS"));
             }
         },
-        methods: ["GET", "POST"],
+        methods: ["GET", "POST", "PUT", "DELETE"],
         allowedHeaders: ["Content-Type"],
     })
 );
@@ -41,22 +41,6 @@ if (!fs.existsSync(ordersFile)) {
 }
 
 // 📌 Bestellhistorie abrufen
-app.get("/orders", (req, res) => {
-    fs.readFile(ordersFile, "utf8", (err, data) => {
-        if (err) {
-            console.error("❌ Error reading orders file:", err);
-            return res.status(500).json({ error: "Error reading orders file." });
-        }
-        try {
-            res.json(JSON.parse(data || "[]"));
-        } catch (parseErr) {
-            console.error("❌ JSON Parse Error:", parseErr);
-            return res.status(500).json({ error: "Invalid JSON format in orders file." });
-        }
-    });
-});
-
-// 📌 Bestellhistorie abrufen (mit Logging)
 app.get("/orders", (req, res) => {
     console.log("📥 GET request to /orders received");
     fs.readFile(ordersFile, "utf8", (err, data) => {
@@ -74,7 +58,7 @@ app.get("/orders", (req, res) => {
     });
 });
 
-// 📌 Neue Bestellung speichern (mit Logging)
+// 📌 Neue Bestellung speichern (mit Datum und ID)
 app.post("/orders", (req, res) => {
     console.log("📥 POST request to /orders received with body:", req.body);
     const newOrder = req.body;
@@ -83,6 +67,10 @@ app.post("/orders", (req, res) => {
         console.error("❌ Invalid order format received:", req.body);
         return res.status(400).json({ error: "Invalid order format." });
     }
+
+    // Datum und ID hinzufügen
+    newOrder.date = new Date().toISOString();
+    newOrder.id = new Date().getTime().toString();  // Verwende Zeitstempel als ID
 
     fs.readFile(ordersFile, "utf8", (err, data) => {
         let orders = [];
@@ -108,6 +96,80 @@ app.post("/orders", (req, res) => {
     });
 });
 
+
+// 📌 Alle Bestellungen löschen (DELETE)
+app.delete("/orders", (req, res) => {
+    fs.writeFile(ordersFile, "[]", "utf8", (err) => {
+        if (err) {
+            console.error("❌ Error clearing orders:", err);
+            return res.status(500).json({ error: "Error clearing orders." });
+        }
+        console.log("✅ All orders have been deleted.");
+        res.json({ message: "All orders have been deleted." });
+    });
+});
+
+// 📌 Bestellhistorie löschen (DELETE) nach ID
+app.delete("/orders/:id", (req, res) => {
+    const orderId = req.params.id;
+
+    fs.readFile(ordersFile, "utf8", (err, data) => {
+        if (err) {
+            console.error("❌ Error reading orders file:", err);
+            return res.status(500).json({ error: "Error reading orders file." });
+        }
+
+        let orders = JSON.parse(data || "[]");
+        orders = orders.filter(order => order.id !== orderId); // Bestellung mit der angegebenen ID entfernen
+
+        fs.writeFile(ordersFile, JSON.stringify(orders, null, 2), (err) => {
+            if (err) {
+                console.error("❌ Error saving orders:", err);
+                return res.status(500).json({ error: "Error saving orders." });
+            }
+            console.log(`✅ Order with ID ${orderId} deleted.`);
+            res.json({ message: `Order with ID ${orderId} deleted.` });
+        });
+    });
+});
+
+// 📌 Bestellung ändern (PUT) nach ID
+app.put("/orders/:id", (req, res) => {
+    const orderId = req.params.id;
+    const updatedOrder = req.body;
+
+    if (!updatedOrder || !updatedOrder.items || updatedOrder.items.length === 0) {
+        console.error("❌ Invalid order format received:", updatedOrder);
+        return res.status(400).json({ error: "Invalid order format." });
+    }
+
+    updatedOrder.date = new Date().toISOString(); // Datum aktualisieren
+
+    fs.readFile(ordersFile, "utf8", (err, data) => {
+        if (err) {
+            console.error("❌ Error reading orders file:", err);
+            return res.status(500).json({ error: "Error reading orders file." });
+        }
+
+        let orders = JSON.parse(data || "[]");
+        const orderIndex = orders.findIndex(order => order.id === orderId);
+
+        if (orderIndex === -1) {
+            return res.status(404).json({ error: "Order not found." });
+        }
+
+        orders[orderIndex] = updatedOrder; // Bestellung aktualisieren
+
+        fs.writeFile(ordersFile, JSON.stringify(orders, null, 2), (err) => {
+            if (err) {
+                console.error("❌ Error saving orders:", err);
+                return res.status(500).json({ error: "Error saving orders." });
+            }
+            console.log(`✅ Order with ID ${orderId} updated.`);
+            res.json({ message: `Order with ID ${orderId} updated.` });
+        });
+    });
+});
 
 // 📌 Server starten
 app.listen(PORT, () => {
