@@ -40,6 +40,11 @@ if (!fs.existsSync(ordersFile)) {
     console.log("✅ Created missing orders.json file.");
 }
 
+app.get("/", (req, res) => {
+    res.send("Server is running! Access API at /orders");
+});
+
+
 // 📌 Bestellhistorie abrufen
 app.get("/orders", (req, res) => {
     console.log("📥 GET request to /orders received");
