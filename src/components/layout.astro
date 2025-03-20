@@ -73,10 +73,10 @@
       <slot />
     </main>
 
-    <!-- ✅ Footer mit Datenschutz-Link -->
+    <!-- ✅ Footer mit Datenschutz-Link (angepasster Pfad) -->
     <footer>
       <p>&copy; 2024 Syrian Restaurant. All rights reserved.</p>
-      <p><a href="/projektarbeitgithub1/privacy">📜 Datenschutz</a></p>
+      <p><a href="/projektarbeitgithub1/privacy.html">📜 Datenschutz</a></p>
     </footer>
 
     <!-- ✅ Cookie-Zustimmungsbanner -->
@@ -89,23 +89,22 @@
       document.addEventListener("DOMContentLoaded", function () {
         const cookieBanner = document.getElementById("cookie-banner");
         const acceptCookiesBtn = document.getElementById("accept-cookies");
-    
+
         if (!cookieBanner || !acceptCookiesBtn) {
-          console.warn("Cookie-Banner oder Accept-Button nicht gefunden!");
+          console.warn("⚠️ Cookie-Banner oder Accept-Button nicht gefunden!");
           return;
         }
-    
+
         if (!localStorage.getItem("cookiesAccepted")) {
           cookieBanner.style.display = "block";
         }
-    
+
         acceptCookiesBtn.addEventListener("click", function () {
           localStorage.setItem("cookiesAccepted", "true");
           cookieBanner.style.display = "none";
         });
       });
     </script>
-    
 
     <style>
       .cookie-banner {
