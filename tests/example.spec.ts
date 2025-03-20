@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
   await page.goto('http://localhost:4321/projektarbeitgithub1/');
-  await expect(page).toHaveTitle(/Restaurante/);  
+  await expect(page).toHaveTitle(/Syrian Restaurant - Best Food Experience/);  
 });
 
 test('navigation to menu', async ({ page }) => {
