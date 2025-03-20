@@ -6,11 +6,11 @@
 
     <!-- ✅ SEO Meta-Tags -->
     <title>Syrian Restaurant - Best Food Experience</title>
-    <meta content="Enjoy the best Syrian food experience with fresh ingredients and authentic taste. Visit our restaurant today!" name="description">
-    <meta content="Syrian Restaurant, Middle Eastern Food, Best Syrian Food, Authentic Taste, Order Online" name="keywords">
-    <meta content="Syrian Restaurant Team" name="author">
-    <meta content="https://momoking01.github.io/projektarbeitgithub1/" name="canonical">
-    
+    <meta content="Enjoy the best Syrian food experience with fresh ingredients and authentic taste. Visit our restaurant today!" name="description" />
+    <meta content="Syrian Restaurant, Middle Eastern Food, Best Syrian Food, Authentic Taste, Order Online" name="keywords" />
+    <meta content="Syrian Restaurant Team" name="author" />
+    <meta content="https://momoking01.github.io/projektarbeitgithub1/" name="canonical" />
+
     <!-- Preload & Performance -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://cdn.jsdelivr.net" rel="preconnect">
@@ -20,9 +20,9 @@
     <meta content="website" property="og:type">
     <meta content="Syrian Restaurant - Best Food Experience" property="og:title">
     <meta content="Enjoy the best Syrian food experience with fresh ingredients and authentic taste. Visit our restaurant today!" property="og:description">
-    <meta content="https://momoking01.github.io/projektarbeitgithub1/image.jpg" property="og:image"> 
+    <meta content="https://momoking01.github.io/projektarbeitgithub1/image.jpg" property="og:image">
     <meta content="https://momoking01.github.io/projektarbeitgithub1/" property="og:url">
-    
+
     <!-- Twitter Meta Tags -->
     <meta content="summary_large_image" name="twitter:card">
     <meta content="Syrian Restaurant - Best Food Experience" name="twitter:title">
@@ -52,10 +52,10 @@
     </script>
 
     <!-- Favicon -->
-    <link href="/projektarbeitgithub1/favicon.svg" rel="icon" type="image/png" />
-    
-    <link href="/projektarbeitgithub1/styles.css" rel="stylesheet" />
+    <link href="/projektarbeitgithub1/favicon.svg" rel="icon" type="image/png">
+    <link href="/projektarbeitgithub1/styles.css" rel="stylesheet">
   </head>
+
   <body>
     <header>
       <nav>
@@ -73,48 +73,54 @@
       <slot />
     </main>
 
-    <!-- ✅ Footer mit Datenschutz-Link (angepasster Pfad) -->
+    <!-- ✅ Footer mit Datenschutz & Impressum -->
     <footer>
       <p>&copy; 2024 Syrian Restaurant. All rights reserved.</p>
-      <p><a href="/projektarbeitgithub1/privacy.html">📜 Datenschutz</a></p>
+      <p>
+        <a class="footer-link" href="/projektarbeitgithub1/privacy.html">📜 Datenschutz</a> | 
+        <a class="footer-link" href="/projektarbeitgithub1/impressum.html">📜 Impressum</a>
+      </p>
     </footer>
 
-    <!-- ✅ Cookie-Zustimmungsbanner -->
+    <!-- ✅ Cookie-Zustimmungsbanner mit DSGVO-Optionen -->
     <div class="cookie-banner" id="cookie-banner">
       <p>Diese Website verwendet Cookies, um die Benutzerfreundlichkeit zu verbessern.</p>
       <button id="accept-cookies">Akzeptieren</button>
+      <button id="decline-cookies">Ablehnen</button>
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const cookieBanner = document.getElementById("cookie-banner");
-        const acceptCookiesBtn = document.getElementById("accept-cookies");
 
-        if (!cookieBanner || !acceptCookiesBtn) {
-          console.warn("⚠️ Cookie-Banner oder Accept-Button nicht gefunden!");
-          return;
-        }
+    document.addEventListener("DOMContentLoaded", function () {
+    const cookieBanner = document.getElementById("cookie-banner");
+    const acceptCookiesBtn = document.getElementById("accept-cookies");
 
-        if (!localStorage.getItem("cookiesAccepted")) {
-          cookieBanner.style.display = "block";
-        }
+    if (!cookieBanner || !acceptCookiesBtn) {
+        console.warn("⚠️ Cookie-Banner oder Accept-Button nicht gefunden!");
+        return;
+    }
 
-        acceptCookiesBtn.addEventListener("click", function () {
-          localStorage.setItem("cookiesAccepted", "true");
-          cookieBanner.style.display = "none";
-        });
-      });
+    if (!localStorage.getItem("cookiesAccepted")) {
+        cookieBanner.style.display = "block";
+          }
+
+          acceptCookiesBtn.addEventListener("click", function () {
+              localStorage.setItem("cookiesAccepted", "true");
+              cookieBanner.style.display = "none";
+          });
+    });
     </script>
 
     <style>
+      /* ✅ Cookie Banner */
       .cookie-banner {
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
-        background: rgb(0 0 0 / 80%);
+        background: rgba(0 0 0 / 90%);
         color: white;
-        padding: 10px;
+        padding: 12px;
         text-align: center;
         display: none;
       }
@@ -123,22 +129,29 @@
         background: #ff9800;
         color: white;
         border: none;
-        padding: 5px 10px;
+        padding: 6px 12px;
         margin-left: 10px;
         cursor: pointer;
+        font-weight: bold;
+        border-radius: 5px;
       }
 
+      /* ✅ Footer */
       footer {
         text-align: center;
+        background-color: #222;
+        color: #FFF;
+        padding: 15px;
         margin-top: 20px;
       }
 
-      footer a {
-        color: #007bff;
+      .footer-link {
+        color: #FFD700;
         text-decoration: none;
+        font-weight: bold;
       }
 
-      footer a:hover {
+      .footer-link:hover {
         text-decoration: underline;
       }
     </style>
