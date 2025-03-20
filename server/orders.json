@@ -17,5 +17,15 @@
     "date": "2025-03-19T12:00:00Z",
     "items": [],
     "payment": "cash"
+  },
+  {
+    "date": "2025-03-20T10:45:08.763Z",
+    "items": [
+      {
+        "name": "colaaaaaaa",
+        "quantity": 1
+      }
+    ],
+    "payment": "sepa"
   }
 ]
