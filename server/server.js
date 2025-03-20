@@ -9,12 +9,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 5000; // Falls Render einen Port setzt, nutze diesen
+const PORT = process.env.PORT || 5000;
 const ordersFile = path.join(__dirname, "orders.json");
 
 const allowedOrigins = [
     "https://momoking01.github.io",
-    "https://projektarbeitgithub1.onrender.com"
+    "https://projektarbeitgithub1.onrender.com",
+    "http://localhost:4321" // Lokales Testen erlauben
 ];
 
 app.use(compression());
@@ -33,10 +34,11 @@ app.use(
     })
 );
 
-// Startseite für Debugging
-app.get("/", (req, res) => {
-    res.send("✅ Server is running! Access API at /orders");
-});
+// Sicherstellen, dass orders.json existiert
+if (!fs.existsSync(ordersFile)) {
+    fs.writeFileSync(ordersFile, "[]", "utf8");
+    console.log("✅ Created missing orders.json file.");
+}
 
 // 📌 Bestellhistorie abrufen
 app.get("/orders", (req, res) => {
@@ -54,11 +56,31 @@ app.get("/orders", (req, res) => {
     });
 });
 
-// 📌 Neue Bestellung speichern
+// 📌 Bestellhistorie abrufen (mit Logging)
+app.get("/orders", (req, res) => {
+    console.log("📥 GET request to /orders received");
+    fs.readFile(ordersFile, "utf8", (err, data) => {
+        if (err) {
+            console.error("❌ Error reading orders file:", err);
+            return res.status(500).json({ error: "Error reading orders file." });
+        }
+        try {
+            console.log("📤 Sending orders data:", data);
+            res.json(JSON.parse(data || "[]"));
+        } catch (parseErr) {
+            console.error("❌ JSON Parse Error:", parseErr);
+            return res.status(500).json({ error: "Invalid JSON format in orders file." });
+        }
+    });
+});
+
+// 📌 Neue Bestellung speichern (mit Logging)
 app.post("/orders", (req, res) => {
+    console.log("📥 POST request to /orders received with body:", req.body);
     const newOrder = req.body;
 
     if (!newOrder || !newOrder.items || newOrder.items.length === 0) {
+        console.error("❌ Invalid order format received:", req.body);
         return res.status(400).json({ error: "Invalid order format." });
     }
 
@@ -85,6 +107,7 @@ app.post("/orders", (req, res) => {
         });
     });
 });
+
 
 // 📌 Server starten
 app.listen(PORT, () => {
