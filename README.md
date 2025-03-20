@@ -78,6 +78,44 @@ All commands are run from the root of the project, from a terminal:
 | node scripts/convertImages.js     | bilder optimieren                                |
 
 
+powershell commands:
+
+post:
+Invoke-RestMethod -Uri "http://projektarbeitgithub1.onrender.com/orders" -Method Post -Headers @{"Content-Type"="application/json"} -Body '{
+  "date": "2025-03-19T12:00:00Z",
+  "items": [
+    { "name": "Pizza Margherita", "quantity": 2 },
+    { "name": "Caesar Salad", "quantity": 1 }
+  ],
+  "payment": "cash"
+}'
+
+
+
+alles Delete:
+Invoke-RestMethod -Uri "http://projektarbeitgithub1.onrender.com/orders" -Method Delete
+
+
+
+delete nach id:
+Invoke-RestMethod -Uri "http://projektarbeitgithub1.onrender.com/orders/1742487468395" -Method Delete
+
+
+
+put nach id:
+Invoke-RestMethod -Uri "http://projektarbeitgithub1.onrender.com/orders/1742487468395" -Method Put -Headers @{"Content-Type"="application/json"} -Body '{
+  "id": "1742487468395",
+  "date": "2025-03-20T16:17:48.395Z",
+  "items": [
+    { "name": "Pizza Margherita", "quantity": 3 },
+    { "name": "Caesar Salad", "quantity": 2 }
+  ],
+  "payment": "sepa"
+}'
+
+
+
+
 | programm lokal testen                                                                | 
 | :----------------------------------------------------------------------------------- | 
 | npm run lint                                                                         | 
@@ -90,4 +128,5 @@ All commands are run from the root of the project, from a terminal:
 
 # 🌐 View the Project Live: (https://momoking01.github.io/projektarbeitgithub1/)
 # 🌐 As admin log in (https://momoking01.github.io/projektarbeitgithub1/auth)
-# 🌐 server (https://projektarbeitgithub1.onrender.com/)
+# 🌐 orders on server (https://projektarbeitgithub1.onrender.com/orders)
+
