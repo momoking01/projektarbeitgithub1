@@ -11,15 +11,24 @@ const app = express();
 const PORT = 5000;
 const ordersFile = path.join(__dirname, "orders.json");
 
-app.use(express.json());
-app.use(cors());
+const allowedOrigins = [
+    "https://momoking01.github.io",  
+    "https://projektarbeitgithub1.onrender.com" 
+];
 
-// Standard-Route für die Root-URL
+app.use(express.json());
+app.use(
+    cors({
+        origin: allowedOrigins,
+        methods: ["GET", "POST"],
+        allowedHeaders: ["Content-Type"],
+    })
+);
+
 app.get("/", (req, res) => {
-    res.send("Server is running!");
+    res.send("Server is running! Access API at /orders");
 });
 
-// Bestellungen abrufen
 app.get("/orders", (req, res) => {
     fs.readFile(ordersFile, "utf8", (err, data) => {
         if (err) {
@@ -29,7 +38,6 @@ app.get("/orders", (req, res) => {
     });
 });
 
-// Neue Bestellung hinzufügen
 app.post("/orders", (req, res) => {
     const newOrder = req.body;
 
@@ -50,7 +58,7 @@ app.post("/orders", (req, res) => {
     });
 });
 
-// Server starten
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`✅ Server running on http://localhost:${PORT}`);
+    console.log(`✅ API is available at http://localhost:${PORT}/orders`);
 });
