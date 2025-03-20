@@ -75,6 +75,7 @@ All commands are run from the root of the project, from a terminal:
 | eslint eslint-plugin-astro        | Installs EsLint                                  |
 | npm install --save-dev            |                                                  |
 | postcss-html stylelint-config-html| Installs StyleLint                               |
+| node scripts/convertImages.js     | bilder optimieren                                |
 
 
 | programm lokal testen                                                                | 
