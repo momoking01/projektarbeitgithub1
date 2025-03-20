@@ -12,7 +12,8 @@
     "preview": "astro preview",
     "start": "astro dev",
     "serve": "astro preview",
-    "test": "playwright test"
+    "test": "playwright test",
+    "server": "node server/server.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.45.1",
@@ -29,7 +30,10 @@
     "stylelint-config-standard": "^37.0.0"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "fs": "^0.0.1-security",
     "path": "^0.12.7",
     "typescript": "^5.5.3"
   }

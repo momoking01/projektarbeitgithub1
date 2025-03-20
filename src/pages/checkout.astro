@@ -39,7 +39,7 @@ import Layout from "../components/layout.astro";
     totalItems.textContent = totalCount;
   }
 
-  function placeOrder() {
+  async function placeOrder() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     if (cart.length === 0) {
       alert("Your cart is empty.");
@@ -47,7 +47,6 @@ import Layout from "../components/layout.astro";
     }
 
     let paymentMethod = document.getElementById("payment-method").value;
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
     let newOrder = {
       date: new Date().toISOString(),
@@ -55,13 +54,29 @@ import Layout from "../components/layout.astro";
       payment: paymentMethod
     };
 
-    orders.push(newOrder);
-    localStorage.setItem("orders", JSON.stringify(orders));
-    localStorage.removeItem("cart");
+    try {
+      const response = await fetch("http://localhost:5000/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newOrder)
+      });
 
-    alert("Order placed successfully!");
-    window.location.href = "/projektarbeitgithub1/orders";
+      if (!response.ok) {
+        throw new Error("Failed to place order.");
+      }
+
+      localStorage.removeItem("cart");
+      alert("Order placed successfully!");
+      window.location.href = "/projektarbeitgithub1/orders";
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong. Try again later.");
+    }
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("place-order-btn").addEventListener("click", placeOrder);
+  });
 
   window.onload = loadCartSummary;
 </script>

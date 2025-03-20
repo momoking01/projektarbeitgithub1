@@ -10,30 +10,40 @@ import Layout from "../components/layout.astro";
 </Layout>
 
 <script is:inline>
-  function loadOrders() {
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
-    let ordersList = document.getElementById("orders-list");
-    ordersList.innerHTML = "";
+  async function loadOrders() {
+    try {
+      const response = await fetch("http://localhost:5000/orders");
+      if (!response.ok) {
+        throw new Error("Failed to fetch orders.");
+      }
 
-    if (orders.length === 0) {
-      ordersList.innerHTML = "<p>No previous orders.</p>";
-      return;
-    }
+      let orders = await response.json();
+      let ordersList = document.getElementById("orders-list");
+      ordersList.innerHTML = "";
 
-    orders.forEach((order, index) => {
-      let li = document.createElement("li");
-      li.innerHTML = `<strong>Order ${index + 1}</strong> - ${new Date(order.date).toLocaleString()} - Payment: ${order.payment}`;
+      if (orders.length === 0) {
+        ordersList.innerHTML = "<p>No previous orders.</p>";
+        return;
+      }
 
-      let itemsList = document.createElement("ul");
-      order.items.forEach(item => {
-        let itemLi = document.createElement("li");
-        itemLi.textContent = `${item.name} (x${item.quantity})`;
-        itemsList.appendChild(itemLi);
+      orders.forEach((order, index) => {
+        let li = document.createElement("li");
+        li.innerHTML = `<strong>Order ${index + 1}</strong> - ${new Date(order.date).toLocaleString()} - Payment: ${order.payment}`;
+
+        let itemsList = document.createElement("ul");
+        order.items.forEach(item => {
+          let itemLi = document.createElement("li");
+          itemLi.textContent = `${item.name} (x${item.quantity})`;
+          itemsList.appendChild(itemLi);
+        });
+
+        li.appendChild(itemsList);
+        ordersList.appendChild(li);
       });
-
-      li.appendChild(itemsList);
-      ordersList.appendChild(li);
-    });
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Could not load order history.");
+    }
   }
 
   window.onload = loadOrders;

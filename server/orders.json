@@ -1,0 +1,21 @@
+[
+  {
+    "date": "2025-03-19T12:00:00Z",
+    "items": [
+      {
+        "name": "Pizza Margherita",
+        "quantity": 2
+      },
+      {
+        "name": "Caesar Salad",
+        "quantity": 1
+      }
+    ],
+    "payment": "cash"
+  },
+  {
+    "date": "2025-03-19T12:00:00Z",
+    "items": [],
+    "payment": "cash"
+  }
+]
