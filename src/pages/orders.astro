@@ -12,7 +12,7 @@ import Layout from "../components/layout.astro";
 <script is:inline>
   async function loadOrders() {
     try {
-      const response = await fetch("http://https://projektarbeitgithub1.onrender.com/orders");
+      const response = await fetch("http://projektarbeitgithub1.onrender.com/orders");
       if (!response.ok) {
         throw new Error("Failed to fetch orders.");
       }
