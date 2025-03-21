@@ -24,6 +24,24 @@ import Layout from "../components/layout.astro";
       </div>
     </div>
 
+    <div class="menu-category">
+      <h2>Salads</h2>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <span class="item-name">Caesar Salad</span> 
+          <button onclick="addToCart('Caesar Salad')">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <span class="item-name">Greek Salad</span> 
+          <button onclick="addToCart('Greek Salad')">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <span class="item-name">Caprese Salad</span> 
+          <button onclick="addToCart('Caprese Salad')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
     <div class="menu-category admin-section">
       <h2>Admin Products</h2>
       <div class="menu-grid" id="admin-products-list"></div>
@@ -38,7 +56,7 @@ import Layout from "../components/layout.astro";
     adminProductsList.innerHTML = "";
     products.forEach(product => {
       let div = document.createElement("div");
-      div.classList.add("menu-item", "admin-item"); // 💡 Klasse wird aktiv zugewiesen
+      div.classList.add("menu-item", "admin-item");
       div.innerHTML = `<span class="admin-product-name">${product}</span> 
                        <button class="admin-button" onclick="addToCart('${product}')">Add to Cart</button>`;
       adminProductsList.appendChild(div);
@@ -61,7 +79,7 @@ import Layout from "../components/layout.astro";
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255 255 255 / 15%);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 10px;
     padding: 20px;
     backdrop-filter: blur(5px);
