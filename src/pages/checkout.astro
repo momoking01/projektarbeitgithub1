@@ -16,7 +16,7 @@ const background = "/Menu.image/image1.png"; // Direkt als String setzen
 </html>
 
 <Layout>
-  <div class="checkout-container" style={`background: url('${background}') no-repeat center center fixed; background-size: cover;`}>
+  <div class="checkout-container">
     <h1>Checkout</h1>
     <p><strong>Total Items:</strong> <span id="total-items">0</span></p>
 
@@ -95,9 +95,9 @@ const background = "/Menu.image/image1.png"; // Direkt als String setzen
 </script>
 
 <style>
-  /* ✅ Hintergrundbild für Checkout-Seite */
-  body {
-    background: url({backgroundImage}) no-repeat center center fixed;
+   /* ✅ Hintergrundbild für Checkout-Seite */
+   body {
+    background: url("{backgroundImage}") no-repeat center center fixed;
     background-size: cover;
   }
 
