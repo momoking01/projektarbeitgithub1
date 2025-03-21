@@ -1,6 +1,10 @@
 ---
 import Layout from "../components/layout.astro";
-const background = "/Menu.image/image1.png"; // Direkt als String setzen
+
+// Ermittlung des richtigen Hintergrundbilds
+const background = Astro.url.pathname.includes('checkout')
+  ? "/projektarbeitgithub1/menu-bg.png"
+  : "/projektarbeitgithub1/menu-bg.png"; // Falls Checkout ein anderes Bild haben soll, ändere dies.
 ---
 
 <html lang="en">
