@@ -1,6 +1,22 @@
 ---
 import Layout from "../components/layout.astro";
+
+const background = Astro.url.pathname.includes('checkout')
+  ? "/projektarbeitgithub1/menu-bg.png"
+  : "/projektarbeitgithub1/menu-bg.png"; 
 ---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Website</title>
+    <link href="/public/styles.css" rel="stylesheet">
+  </head>
+  <body style={`background: url('${background}') no-repeat center center fixed; background-size: cover;`}>
+    <slot />
+  </body>
+</html>
 
 <Layout>
   <div class="cart-page">
@@ -92,6 +108,11 @@ import Layout from "../components/layout.astro";
 </script>
 
 <style>
+  body {
+    background: url("{backgroundImage}") no-repeat center center fixed;
+    background-size: cover;
+  }
+
     /* ✅ Verbesserte Lesbarkeit für Texte */
   .cart-container {
     background: rgba(0 0 0 / 60%); /* Leicht transparenter schwarzer Hintergrund */
