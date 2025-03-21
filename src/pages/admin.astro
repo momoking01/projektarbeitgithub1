@@ -5,15 +5,19 @@ import Layout from "../components/layout.astro";
 <Layout>
   <div class="admin-container">
     <h1>Admin Panel</h1>
+    <div class="admin-item admin-product-name" style="display: none;"></div>
+
     <p>Only admins can access this page.</p>
 
     <div id="admin-controls" style="display: none;">
       <h2>Add Product</h2>
-      <input id="product-name" placeholder="Product Name" type="text">
-      <button id="addProductButton">Add</button>
+      <div class="admin-input-group">
+        <input id="product-name" placeholder="Product Name" type="text">
+        <button class="admin-button" id="addProductButton">Add</button>
+      </div>
 
-      <h2>Remove Product</h2>
-      <ul id="product-list"></ul>
+      <h2>Manage Products</h2>
+      <ul class="admin-product-list" id="product-list"></ul>
     </div>
   </div>
 </Layout>
@@ -31,25 +35,23 @@ import Layout from "../components/layout.astro";
   }
 
   function addProduct() {
-      let productName = document.getElementById("product-name").value.trim();
-      if (!productName) {
-          alert("Please enter a product name.");
-          return;
-      }
+    let productName = document.getElementById("product-name").value.trim();
+    if (!productName) {
+      alert("Please enter a product name.");
+      return;
+    }
 
-      let products = JSON.parse(localStorage.getItem("products")) || [];
+    let products = JSON.parse(localStorage.getItem("products")) || [];
 
-      // Überprüfen, ob das Produkt bereits existiert
-      if (products.includes(productName)) {
-          alert("Product already exists!");
-          return;
-      }
+    if (products.includes(productName)) {
+      alert("Product already exists!");
+      return;
+    }
 
-      products.push(productName);
-      localStorage.setItem("products", JSON.stringify(products));
-      loadProducts();
+    products.push(productName);
+    localStorage.setItem("products", JSON.stringify(products));
+    loadProducts();
   }
-
 
   function loadProducts() {
     let products = JSON.parse(localStorage.getItem("products")) || [];
@@ -58,14 +60,20 @@ import Layout from "../components/layout.astro";
 
     products.forEach((product, index) => {
       let li = document.createElement("li");
-      li.textContent = product;
+      li.classList.add("admin-item"); // 💡 Klasse wird aktiv zugewiesen
+
+      let span = document.createElement("span");
+      span.textContent = product;
+      span.classList.add("admin-product-name"); // 💡 Klasse wird aktiv zugewiesen
 
       let removeBtn = document.createElement("button");
       removeBtn.textContent = "Remove";
-      removeBtn.onclick = function() {
+      removeBtn.classList.add("admin-button");
+      removeBtn.onclick = function () {
         removeProduct(index);
       };
 
+      li.appendChild(span);
       li.appendChild(removeBtn);
       productList.appendChild(li);
     });
@@ -80,37 +88,62 @@ import Layout from "../components/layout.astro";
 
   window.onload = function () {
     checkAdminAccess();
-
-    // **EventListener für den Add-Button hinzufügen**
     document.getElementById("addProductButton").addEventListener("click", addProduct);
   };
 </script>
 
 <style>
   .admin-container {
-  background: rgba(0 0 0 / 60%); /* Halbtransparenter Hintergrund */
-  color: #F5E6C1; /* Beige Farbe für bessere Lesbarkeit */
-  text-align: center;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0 0 0 / 60%);
-  max-width: 600px;
-  margin: auto;
-  margin-top: 50px;
+    background: rgba(0 0 0 / 60%);
+    color: #F5E6C1;
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0 0 0 / 60%);
+    max-width: 600px;
+    margin: auto;
+    margin-top: 50px;
   }
 
-  /* ✅ Admin-Überschrift */
-  .admin-container h1 {
-    text-shadow: 2px 2px 5px rgba(0 0 0 / 60%);
+  .admin-input-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .admin-product-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+
+  /* ✅ Admin-Produkt */
+  .admin-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255 255 255 / 15%);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0 0 0 / 40%);
+    width: 100%;
+  }
+
+  .admin-product-name {
+    font-size: 18px;
     font-weight: bold;
-    font-size: 28px;
+    color: #FFD700;
+    flex-grow: 1;
+    text-align: left;
+    padding-left: 10px;
   }
 
-  /* ✅ Admin-Buttons */
-  .admin-container button {
-    background: #28A745;
+  .admin-button {
+    background: #FF4500;
     color: white;
-    padding: 10px 15px;
+    padding: 8px 12px;
     border-radius: 5px;
     font-weight: bold;
     border: none;
@@ -118,7 +151,7 @@ import Layout from "../components/layout.astro";
     transition: all 0.3s ease-in-out;
   }
 
-  .admin-container button:hover {
-    background: #218838;
+  .admin-button:hover {
+    background: #D63000;
   }
 </style>
