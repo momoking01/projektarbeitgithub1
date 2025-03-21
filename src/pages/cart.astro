@@ -3,19 +3,19 @@ import Layout from "../components/layout.astro";
 ---
 
 <Layout>
-  <div class="cart-container">
-    <h1>🛒 Shopping Cart</h1>
-    <ul id="cart-list"></ul>
-    <p><strong>Total Items:</strong> <span id="total-items">0</span></p>
-
-    <button onclick="clearCart()">Clear Cart</button>
-    <button onclick="proceedToCheckout()">Proceed to Checkout</button>
+  <div class="cart-page">
+    <div class="cart-container">
+      <h1>Shopping Cart</h1>
+      <ul id="cart-list">
+      <li class="cart-item placeholder">Your cart is empty</li> <!-- ✅ Verhindert Linter-Fehler -->
+    </ul> 
+      <p><strong>Total Items:</strong> <span id="total-items">0</span></p>
+      <div class="cart-buttons">
+      <button class="clear-cart" onclick="clearCart()">🗑️ Clear Cart</button>
+      <button class="checkout-btn" onclick="proceedToCheckout()">✅ Proceed to Checkout</button>
+    </div> 
+    </div>
   </div>
-
-<!-- Dummy-Element für Stylelint -->
-  <ul style="display: none;">
-    <li></li>
-  </ul>
 </Layout>
 
 <script is:inline>
@@ -25,16 +25,23 @@ import Layout from "../components/layout.astro";
     let totalItems = document.getElementById("total-items");
     cartList.innerHTML = "";
 
+    if (cart.length === 0) {
+      cartList.innerHTML = '<li class="cart-item">Your cart is empty</li>'; // ✅ Fügt einen Standardwert hinzu
+      totalItems.textContent = "0";
+      return;
+    }
+
     let totalCount = 0;
 
     cart.forEach((item, index) => {
       totalCount += item.quantity;
       let li = document.createElement("li");
+      li.className = "cart-item";  // ✅ Stelle sicher, dass die Klasse korrekt angewendet wird
       li.innerHTML = `
         ${item.name} - <strong>${item.quantity}</strong>
-        <button onclick="increaseQuantity(${index})">+</button>
-        <button onclick="decreaseQuantity(${index})">-</button>
-        <button onclick="removeFromCart(${index})">Remove</button>
+        <button onclick="increaseQuantity(${index})">➕</button>
+        <button onclick="decreaseQuantity(${index})">➖</button>
+        <button onclick="removeFromCart(${index})">❌</button>
       `;
       cartList.appendChild(li);
     });
@@ -85,24 +92,72 @@ import Layout from "../components/layout.astro";
 </script>
 
 <style>
+    /* ✅ Verbesserte Lesbarkeit für Texte */
   .cart-container {
+    background: rgba(0 0 0 / 60%); /* Leicht transparenter schwarzer Hintergrund */
+    color: #F5E6C1; /* Helles Beige für besseren Kontrast */
     text-align: center;
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0 0 0 / 50%);
   }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
+  /* ✅ Text-Shadow für bessere Sichtbarkeit */
+  .cart-container h1,
+  .cart-container p {
+    text-shadow: 2px 2px 5px rgba(0 0 0 / 70%);
   }
 
-  li {
-    margin: 10px 0;
-    font-size: 1.2em;
+  /* ✅ Buttons farblich verbessern */
+  .cart-container button {
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .cart-item {  /* ✅ Klasse wird jetzt erkannt */
+    background: rgba(255 255 255 / 20%);
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* Buttons */
+  .cart-buttons {
+    margin-top: 20px;
   }
 
   button {
+    padding: 10px;
     margin: 5px;
-    padding: 5px;
     cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .clear-cart {
+  background: #db0a1b; /* Kräftiges Rot */
+  color: white;
+  box-shadow: 0 4px 6px rgba(230 57 70 / 50%);
+  }
+
+  .clear-cart:hover {
+    background: #742125; /* Dunkleres Rot */
+  }
+
+  .checkout-btn {
+    background: #d8910d; /* Leuchtendes Orange */
+    color: white;
+    box-shadow: 0 4px 6px rgba(255 165 0 / 50%);
+  }
+
+  .checkout-btn:hover {
+    background: #745723; /* Dunkleres Orange */
   }
 </style>

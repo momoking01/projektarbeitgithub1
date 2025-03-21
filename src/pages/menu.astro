@@ -4,31 +4,29 @@ import Layout from "../components/layout.astro";
 
 <Layout>
   <section class="menu-container">
-    <h1>Menu</h1>
+    <h1>Our Menu</h1>
 
-    <div class="menu-categories">
-      <div class="menu-category">
-        <h2>Pizzas</h2>
-        <ul>
-          <li>Pizza Margherita <button onclick="addToCart('Pizza Margherita')">Add to Cart</button></li>
-          <li>Pizza Pepperoni <button onclick="addToCart('Pizza Pepperoni')">Add to Cart</button></li>
-          <li>Pizza Quattro Stagioni <button onclick="addToCart('Pizza Quattro Stagioni')">Add to Cart</button></li>
-        </ul>
+    <div class="menu-category">
+      <h2>Pizzas</h2>
+      <div class="menu-grid">
+        <div class="menu-item">Pizza Margherita <button onclick="addToCart('Pizza Margherita')">Add to Cart</button></div>
+        <div class="menu-item">Pizza Pepperoni <button onclick="addToCart('Pizza Pepperoni')">Add to Cart</button></div>
+        <div class="menu-item">Pizza Quattro Stagioni <button onclick="addToCart('Pizza Quattro Stagioni')">Add to Cart</button></div>
       </div>
+    </div>
 
-      <div class="menu-category">
-        <h2>Salads</h2>
-        <ul>
-          <li>Caesar Salad <button onclick="addToCart('Caesar Salad')">Add to Cart</button></li>
-          <li>Greek Salad <button onclick="addToCart('Greek Salad')">Add to Cart</button></li>
-          <li>Caprese Salad <button onclick="addToCart('Caprese Salad')">Add to Cart</button></li>
-        </ul>
+    <div class="menu-category">
+      <h2>Salads</h2>
+      <div class="menu-grid">
+        <div class="menu-item">Caesar Salad <button onclick="addToCart('Caesar Salad')">Add to Cart</button></div>
+        <div class="menu-item">Greek Salad <button onclick="addToCart('Greek Salad')">Add to Cart</button></div>
+        <div class="menu-item">Caprese Salad <button onclick="addToCart('Caprese Salad')">Add to Cart</button></div>
       </div>
+    </div>
 
-      <div class="menu-category">
-        <h2>Admin Products</h2>
-        <ul id="admin-products-list"></ul>
-      </div>
+    <div class="menu-category">
+      <h2>Admin Products</h2>
+      <div class="menu-grid" id="admin-products-list"></div>
     </div>
   </section>
 </Layout>
@@ -36,14 +34,12 @@ import Layout from "../components/layout.astro";
 <script is:inline>
   function addToCart(productName) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
     let existingProduct = cart.find(item => item.name === productName);
     if (existingProduct) {
-      existingProduct.quantity += 1; // Menge erhöhen, wenn Produkt bereits existiert
+      existingProduct.quantity += 1;
     } else {
       cart.push({ name: productName, quantity: 1 });
     }
-
     localStorage.setItem("cart", JSON.stringify(cart));
     alert(`${productName} added to cart!`);
   }
@@ -52,29 +48,100 @@ import Layout from "../components/layout.astro";
     let products = JSON.parse(localStorage.getItem("products")) || [];
     let adminProductsList = document.getElementById("admin-products-list");
     adminProductsList.innerHTML = "";
-
     products.forEach(product => {
-      let li = document.createElement("li");
-      li.innerHTML = `${product} <button onclick="addToCart('${product}')">Add to Cart</button>`;
-      adminProductsList.appendChild(li);
+      let div = document.createElement("div");
+      div.classList.add("menu-item");
+      div.innerHTML = `${product} <button onclick="addToCart('${product}')">Add to Cart</button>`;
+      adminProductsList.appendChild(div);
     });
   }
 
   window.onload = loadAdminProducts;
 </script>
 
+
 <style>
+    /* ✅ Menü-Hintergrund mit Transparenz */
   .menu-container {
-    text-align: center;
-    padding: 20px;
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: 100px;
+      background: rgba(0 0 0 / 50%); /* ✅ Transparenter Overlay für bessere Lesbarkeit */
   }
 
-  .menu-category {
-    margin-bottom: 20px;
+  /* ✅ Hintergrundbild */
+  .menu-container::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      background: url('../public/optimized/image.webp') no-repeat center center fixed;
+      background-size: cover;
+      opacity: 0.4;
+      z-index: -1;
   }
 
-  button {
-    cursor: pointer;
-    padding: 5px;
+  /* ✅ Überschrift */
+  .menu-container h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      color: #FFD700;
+      font-weight: bold;
+      text-shadow: 3px 3px 8px rgba(0 0 0 / 70%);
+      margin-bottom: 20px;
+  }
+
+  /* ✅ Kategorien-Titel */
+  .menu-category h2 {
+      font-size: 30px;
+      color: #FFF;
+      text-decoration: underline;
+      margin-top: 20px;
+  }
+
+  /* ✅ Menü-Items als Cards */
+  .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+  }
+
+  /* ✅ Einzelne Menü-Card */
+  .menu-item {
+      background: rgba(255 255 255 / 15%);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s ease-in-out;
+  }
+
+  .menu-item:hover {
+      transform: scale(1.05);
+  }
+
+  /* ✅ Button für "Add to Cart" */
+  .menu-item button {
+      background: #FFD700;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      margin-top: 10px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease-in-out;
+  }
+
+  .menu-item button:hover {
+      background: #FFA500;
   }
 </style>

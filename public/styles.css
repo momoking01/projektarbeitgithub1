@@ -115,3 +115,12 @@ footer a.privacy-link:hover {
   font-weight: bold;
   border-radius: 5px;
 }
+
+/* Hintergrund-Styling für den Cart-Bereich */
+.cart-page {
+  background: url('../public/Menu.image/image1.png') no-repeat center center fixed;
+  background-size: cover;
+  filter: brightness(0.7); /* Abdunklung für bessere Lesbarkeit */
+  min-height: 100vh;
+}
+

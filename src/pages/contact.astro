@@ -3,32 +3,83 @@ import Layout from "../components/layout.astro";
 ---
 
 <Layout>
-  <div class="contact-background">
+  <div class="contact-container">
     <h1>Contact Us</h1>
-    <p>Feel free to contact us using the information below:</p>
+    <p>Feel free to reach out using the information below:</p>
 
-    <section>
+    <div class="contact-box">
       <h2>Contact Reem</h2>
-      <address>
-        <p>Email: reem@example.com</p>
-        <p>Phone: 123-456-7890</p>
-      </address>
-    </section>
+      <p>Email: <a href="mailto:reem@example.com">reem@example.com</a></p>
+      <p>Phone: 123-456-7890</p>
+    </div>
 
-    <section>
+    <div class="contact-box">
       <h2>Contact Qusai</h2>
-      <address>
-        <p>Email: qusai@example.com</p>
-        <p>Phone: 987-654-3210</p>
-      </address>
-    </section>
+      <p>Email: <a href="mailto:qusai@example.com">qusai@example.com</a></p>
+      <p>Phone: 987-654-3210</p>
+    </div>
 
-    <section>
+    <div class="contact-box">
       <h2>Contact Mohamad</h2>
-      <address>
-        <p>Email: mohamad@example.com</p>
-        <p>Phone: 555-123-4567</p>
-      </address>
-    </section>
+      <p>Email: <a href="mailto:mohamad@example.com">mohamad@example.com</a></p>
+      <p>Phone: 555-123-4567</p>
+    </div>
   </div>
 </Layout>
+
+<style>
+/* ✅ Hintergrund für die Contact-Seite */
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e, #16213e); /* Eleganter Dunkelblau-Verlauf */
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+/* ✅ Kontakt-Box */
+.contact-box {
+    background: rgba(255 255 255 / 10%);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 50%);
+}
+
+/* ✅ Titel */
+.contact-container h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 2px 2px 5px rgba(0 0 0 / 70%);
+}
+
+/* ✅ Kontakt-Details */
+.contact-container h2 {
+    font-size: 22px;
+    margin-top: 15px;
+    color: #FFD700;
+}
+
+.contact-container p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* ✅ Links */
+.contact-container a {
+    color: #FFD700;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.contact-container a:hover {
+    text-decoration: underline;
+}
+</style>
