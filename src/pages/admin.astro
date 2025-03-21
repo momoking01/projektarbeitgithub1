@@ -88,16 +88,37 @@ import Layout from "../components/layout.astro";
 
 <style>
   .admin-container {
-    text-align: center;
-    padding: 20px;
+  background: rgba(0 0 0 / 60%); /* Halbtransparenter Hintergrund */
+  color: #F5E6C1; /* Beige Farbe für bessere Lesbarkeit */
+  text-align: center;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0 0 0 / 60%);
+  max-width: 600px;
+  margin: auto;
+  margin-top: 50px;
   }
 
-  .admin-container input {
-    margin: 10px;
+  /* ✅ Admin-Überschrift */
+  .admin-container h1 {
+    text-shadow: 2px 2px 5px rgba(0 0 0 / 60%);
+    font-weight: bold;
+    font-size: 28px;
   }
 
-  .admin-container ul {
-    list-style-type: none;
-    padding: 0;
+  /* ✅ Admin-Buttons */
+  .admin-container button {
+    background: #28A745;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .admin-container button:hover {
+    background: #218838;
   }
 </style>

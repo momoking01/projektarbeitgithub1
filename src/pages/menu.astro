@@ -24,7 +24,7 @@ import Layout from "../components/layout.astro";
       </div>
     </div>
 
-    <div class="menu-category">
+    <div class="admin-container">
       <h2>Admin Products</h2>
       <div class="menu-grid" id="admin-products-list"></div>
     </div>
@@ -59,9 +59,8 @@ import Layout from "../components/layout.astro";
   window.onload = loadAdminProducts;
 </script>
 
-
 <style>
-    /* ✅ Menü-Hintergrund mit Transparenz */
+  /* ✅ Menü-Hintergrund mit Transparenz */
   .menu-container {
       position: relative;
       width: 100%;
@@ -71,7 +70,7 @@ import Layout from "../components/layout.astro";
       align-items: center;
       text-align: center;
       padding-top: 100px;
-      background: rgba(0 0 0 / 50%); /* ✅ Transparenter Overlay für bessere Lesbarkeit */
+      background: rgba(0 0 0 / 50%);
   }
 
   /* ✅ Hintergrundbild */
@@ -97,7 +96,7 @@ import Layout from "../components/layout.astro";
   }
 
   /* ✅ Kategorien-Titel */
-  .menu-category h2 {
+  .menu-category h2, .admin-container h2 {
       font-size: 30px;
       color: #FFF;
       text-decoration: underline;
@@ -143,5 +142,18 @@ import Layout from "../components/layout.astro";
 
   .menu-item button:hover {
       background: #FFA500;
+  }
+
+  /* ✅ Admin-Bereich Styling */
+  .admin-container {
+      background: rgba(0 0 0 / 60%);
+      color: #F5E6C1;
+      text-align: center;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0 0 0 / 60%);
+      max-width: 600px;
+      margin: auto;
+      margin-top: 50px;
   }
 </style>
