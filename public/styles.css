@@ -1,3 +1,8 @@
+body {
+  background: url('/Menu.image/image1.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
 /* ✅ Global Styles */
 body {
   font-family: 'Arial', sans-serif;

@@ -1,11 +1,6 @@
 ---
 import Layout from "../components/layout.astro";
-const page = Astro.url.pathname;
-const background = page.includes('checkout')
-  ? "/public/Menu.image/image1.png"
-  : page.includes('cart')
-  ? "/public/optimized/cart-bg.webp"
-  : "/public/optimized/default-bg.webp";
+const background = "/Menu.image/image1.png"; // Direkt als String setzen
 ---
 
 <html lang="en">
@@ -21,7 +16,7 @@ const background = page.includes('checkout')
 </html>
 
 <Layout>
-  <div class="checkout-container">
+  <div class="checkout-container" style={`background: url('${background}') no-repeat center center fixed; background-size: cover;`}>
     <h1>Checkout</h1>
     <p><strong>Total Items:</strong> <span id="total-items">0</span></p>
 
