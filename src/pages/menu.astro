@@ -60,6 +60,50 @@ import Layout from "../components/layout.astro";
 </script>
 
 <style>
+  /* ✅ Menü-Container */
+  .menu-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+    background: rgba(0 0 0 / 50%);
+  }
+
+  /* ✅ Hintergrundbild */
+  .menu-container::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: url('../public/optimized/image.webp') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.4;
+    z-index: -1;
+  }
+
+  /* ✅ Menü-Titel */
+  .menu-container h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: #FFD700;
+    font-weight: bold;
+    text-shadow: 3px 3px 8px rgba(0 0 0 / 70%);
+    margin-bottom: 20px;
+  }
+
+  /* ✅ Kategorie-Titel */
+  .menu-category h2 {
+    font-size: 30px;
+    color: #FFF;
+    text-decoration: underline;
+    margin-top: 20px;
+  }
+
+  /* ✅ Menü-Gitter */
   .menu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -69,12 +113,13 @@ import Layout from "../components/layout.astro";
     margin: auto;
   }
 
+  /* ✅ Menü-Items */
   .menu-item {
     background: rgba(255 255 255 / 15%);
     border-radius: 10px;
     padding: 20px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0 0 0 / 40%);
+    backdrop-filter: blur(5px);
     transition: transform 0.3s ease-in-out;
   }
 
@@ -82,6 +127,7 @@ import Layout from "../components/layout.astro";
     transform: scale(1.05);
   }
 
+  /* ✅ Menü-Namen (fett & besser sichtbar) */
   .item-name {
     font-weight: bold;
     font-size: 18px;
@@ -90,18 +136,27 @@ import Layout from "../components/layout.astro";
     margin-bottom: 10px;
   }
 
+  /* ✅ Button-Styling */
   .menu-item button {
     background: #FFD700;
-    color: black;
+    color: #000;
     border: none;
     padding: 10px 15px;
     font-weight: bold;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
   }
 
   .menu-item button:hover {
     background: #FFA500;
+  }
+
+  /* ✅ Admin-Bereich mit separatem Styling */
+  .admin-section {
+    background: rgba(0 0 0 / 60%);
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 30px;
   }
 </style>
