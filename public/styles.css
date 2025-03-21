@@ -81,21 +81,12 @@ footer a.privacy-link:hover {
 .menu-background {
   margin: 0;
   height: 100vh;
-  background: url('/projektarbeitgithub1/public/Menu.image/image1.png') no-repeat center center fixed;
+  background: url('/projektarbeitgithub1/optimized/image.webp') no-repeat center center fixed;
   background-size: cover;
   padding-top: 80px;
   color: white;
 }
 
-/* ✅ Kontaktseite-Hintergrund */
-.contact-background {
-  margin: 0;
-  height: 100vh;
-  background: url('/projektarbeitgithub1/public/Contact.image/image2.png') no-repeat center center fixed;
-  background-size: cover;
-  padding: 20px;
-  color: white;
-}
 
 /* ✅ Cookie-Banner */
 .cookie-banner {
@@ -123,7 +114,7 @@ footer a.privacy-link:hover {
 
 /* Hintergrund-Styling für den Cart-Bereich */
 .cart-page {
-  background: url('/projektarbeitgithub1/public/Menu.image/image1.png') no-repeat center center fixed;
+  background: url('/projektarbeitgithub1/menu-bg.png') no-repeat center center fixed;
   background-size: cover;
   filter: brightness(0.7); /* Abdunklung für bessere Lesbarkeit */
   min-height: 100vh;
