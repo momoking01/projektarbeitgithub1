@@ -1,11 +1,27 @@
 ---
 import Layout from "../components/layout.astro";
+const background = "/projektarbeitgithub1/menu-bg.png"; 
 ---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Website</title>
+    <link href="/public/styles.css" rel="stylesheet">
+  </head>
+  <body style={`background: url('${background}') no-repeat center center fixed; background-size: cover;`}>
+    <slot />
+  </body>
+</html>
 
 <Layout>
   <div class="orders-container">
     <h1>Order History</h1>
-    <ul class="orders-list" id="orders-list"></ul>
+    <p class="orders-info">Here you can view all your past orders.</p>
+    <div class="orders-list-wrapper">
+      <ul class="orders-list" id="orders-list"></ul>
+    </div>
   </div>
 </Layout>
 
@@ -22,15 +38,17 @@ import Layout from "../components/layout.astro";
       ordersList.innerHTML = "";
 
       if (orders.length === 0) {
-        ordersList.innerHTML = "<p>No previous orders.</p>";
+        ordersList.innerHTML = "<p class='no-orders'>No previous orders.</p>";
         return;
       }
 
       orders.forEach((order, index) => {
         let li = document.createElement("li");
-        li.innerHTML = `<strong>Order ${index + 1}</strong> - ${new Date(order.date).toLocaleString()} - Payment: ${order.payment}`;
+        li.classList.add("order-item");
+        li.innerHTML = `<strong>Order #${index + 1}</strong> - ${new Date(order.date).toLocaleString()} <br> <span class="order-payment">Payment: ${order.payment}</span>`;
 
         let itemsList = document.createElement("ul");
+        itemsList.classList.add("order-items");
         order.items.forEach(item => {
           let itemLi = document.createElement("li");
           itemLi.textContent = `${item.name} (x${item.quantity})`;
@@ -50,13 +68,49 @@ import Layout from "../components/layout.astro";
 </script>
 
 <style>
+  body {
+    background: url("{background}") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+
   .orders-container {
+    max-width: 900px;
+    margin: auto;
     text-align: center;
+    padding: 50px 20px;
+    background: rgba(0 0 0 / 70%);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0 0 0 / 50%);
+  }
+
+  h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 2px 2px 6px rgba(0 0 0 / 80%);
+  }
+
+  .orders-info {
+    font-size: 18px;
+    color: #bbb;
+    margin-bottom: 20px;
+  }
+
+  .orders-list-wrapper {
+    background: rgba(255 255 255 / 10%);
     padding: 20px;
+    border-radius: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0 0 0 / 50%);
   }
 
   .orders-list {
     list-style-type: none;
     padding: 0;
   }
+
+  
 </style>

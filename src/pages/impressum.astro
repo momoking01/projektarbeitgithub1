@@ -16,7 +16,7 @@ import Layout from "../components/layout.astro";
 
     <h2>Kontakt</h2>
     <p>Telefon: +49 30 12345678<br>
-       E-Mail: <a href="mailto:contact@syrianrestaurant.com">contact@syrianrestaurant.com</a></p>
+       E-Mail: <a class="impressum-link" href="mailto:contact@syrianrestaurant.com">contact@syrianrestaurant.com</a></p>
 
     <h2>Umsatzsteuer-ID</h2>
     <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE123456789</p>
@@ -34,15 +34,68 @@ import Layout from "../components/layout.astro";
     <h2>Urheberrecht</h2>
     <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet.</p>
 
-    <p>Letzte Aktualisierung: März 2025</p>
+    <p class="last-updated">Letzte Aktualisierung: März 2025</p>
   </div>
 </Layout>
 
 <style>
+  /* ✅ Hintergrundfarbe statt Bild */
+  body {
+    background: #1c1c1c;
+    color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  /* ✅ Container für das Impressum */
   .impressum-container {
     max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(255 255 255 / 10%);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0 0 0 / 50%);
     text-align: left;
+    padding-bottom: 75px;
+  }
+
+  /* ✅ Titel */
+  h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #FFD700;
+    text-align: center;
+    text-shadow: 2px 2px 6px rgba(0 0 0 / 80%);
+  }
+
+  h2 {
+    font-size: 22px;
+    color: #FFA500;
+    margin-top: 20px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .impressum-link {
+    color: #4ea8de;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .impressum-link:hover {
+    color: #FFD700;
+  }
+
+  /* ✅ Letzte Aktualisierung */
+  .last-updated {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #bbb;
+    text-align: center;
   }
 </style>

@@ -120,3 +120,44 @@ footer a.privacy-link:hover {
   min-height: 100vh;
 }
 
+.order-item {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.order-item strong {
+  color: #FFD700;
+  font-size: 20px;
+}
+
+.order-payment {
+  font-size: 16px;
+  color: #FFA500;
+  font-weight: bold;
+}
+
+.order-items {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.order-items li {
+  font-size: 16px;
+  padding: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.order-items li:last-child {
+  border-bottom: none;
+}
+
+.no-orders {
+  font-size: 18px;
+  color: #ccc;
+  text-align: center;
+  margin-top: 20px;
+}

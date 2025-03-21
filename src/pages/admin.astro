@@ -5,8 +5,6 @@ import Layout from "../components/layout.astro";
 <Layout>
   <div class="admin-container">
     <h1>Admin Panel</h1>
-    <div class="admin-item admin-product-name" style="display: none;"></div>
-
     <p>Only admins can access this page.</p>
 
     <div id="admin-controls" style="display: none;">
@@ -17,7 +15,7 @@ import Layout from "../components/layout.astro";
       </div>
 
       <h2>Manage Products</h2>
-      <ul class="admin-product-list" id="product-list"></ul>
+      <div class="admin-product-grid" id="product-list"></div>
     </div>
   </div>
 </Layout>
@@ -59,8 +57,8 @@ import Layout from "../components/layout.astro";
     productList.innerHTML = "";
 
     products.forEach((product, index) => {
-      let li = document.createElement("li");
-      li.classList.add("admin-item");
+      let div = document.createElement("div");
+      div.classList.add("admin-product-card");
 
       let span = document.createElement("span");
       span.textContent = product;
@@ -73,9 +71,9 @@ import Layout from "../components/layout.astro";
         removeProduct(index);
       };
 
-      li.appendChild(span);
-      li.appendChild(removeBtn);
-      productList.appendChild(li);
+      div.appendChild(span);
+      div.appendChild(removeBtn);
+      productList.appendChild(div);
     });
   }
 
@@ -112,45 +110,43 @@ import Layout from "../components/layout.astro";
     margin-bottom: 20px;
   }
 
-  .admin-product-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
+  .admin-product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
   }
 
-  /* ✅ Admin-Produkt */
-  .admin-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .admin-product-card {
     background: rgba(255 255 255 / 15%);
-    padding: 15px;
     border-radius: 10px;
-    margin-bottom: 12px;
+    padding: 20px;
+    text-align: center;
     box-shadow: 0 2px 5px rgba(0 0 0 / 40%);
-    width: 100%;
+    transition: transform 0.3s ease-in-out;
   }
 
-  /* ✅ Admin-Produkt-Name jetzt identisch mit dem normalen Menü */
+  .admin-product-card:hover {
+    transform: scale(1.05);
+  }
+
   .admin-product-name {
     font-size: 18px;
     font-weight: bold;
     color: white;
-    flex-grow: 1;
-    text-align: left;
-    padding-left: 10px;
+    display: block;
+    margin-bottom: 10px;
   }
 
-  /* ✅ Admin-Buttons jetzt in Gelb */
   .admin-button {
     background: #FFD700;
     color: black;
-    padding: 12px 18px;
+    padding: 10px 15px;
     border-radius: 8px;
     font-weight: bold;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out;
   }
 
   .admin-button:hover {
