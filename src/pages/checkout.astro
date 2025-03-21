@@ -1,7 +1,22 @@
 ---
 import Layout from "../components/layout.astro";
 
+const background = Astro.url.pathname.includes('checkout')
+  ? "/projektarbeitgithub1/menu-bg.png"
+  : "/projektarbeitgithub1/menu-bg.png"; 
 ---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Website</title>
+    <link href="/public/styles.css" rel="stylesheet">
+  </head>
+  <body style={`background: url('${background}') no-repeat center center fixed; background-size: cover;`}>
+    <slot />
+  </body>
+</html>
 
 <Layout>
   <div class="checkout-page">
@@ -83,11 +98,3 @@ import Layout from "../components/layout.astro";
 
   window.onload = loadCartSummary;
 </script>
-
-<style>
-  /* ✅ Sicherstellen, dass NUR der Warenkorb ein eigenes Hintergrundbild hat */
-  body {
-    background: url("{backgroundImage}") no-repeat center center fixed;
-    background-size: cover;
-  }
-</style>

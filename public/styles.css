@@ -380,6 +380,7 @@ button:hover {
   max-width: 500px;
   margin: auto;
   margin-top: 50px;
+  padding-bottom: 150px;
 }
 
 .checkout-container h1,

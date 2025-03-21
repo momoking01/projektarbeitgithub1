@@ -107,10 +107,3 @@ const background = Astro.url.pathname.includes('checkout')
   window.onload = loadCart;
 </script>
 
-<style>
-  /* ✅ Sicherstellen, dass NUR der Warenkorb ein eigenes Hintergrundbild hat */
-  body {
-    background: url("{backgroundImage}") no-repeat center center fixed;
-    background-size: cover;
-  }
-</style>
