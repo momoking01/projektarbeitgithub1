@@ -2,7 +2,6 @@
 import Layout from "../components/layout.astro";
 ---
 
-
 <Layout>
   <div class="privacy-container">
     <h1>Datenschutzerklärung</h1>
@@ -11,7 +10,7 @@ import Layout from "../components/layout.astro";
     <p>Dieses Restaurant wird betrieben von <strong>Syrian Restaurant Team</strong>.</p>
 
     <h2>2. Erhebung und Speicherung personenbezogener Daten</h2>
-    <p>Wir speichern nur Daten, die für den Betrieb unserer Website notwendig sind, z. B. Bestellungen und technische Logs.</p>
+    <p>Wir speichern nur Daten, die für den Betrieb unserer Website notwendig sind, z. B. Bestellungen und technische Logs.</p>
 
     <h2>3. Cookies</h2>
     <p>Unsere Website verwendet Cookies, um das Nutzungserlebnis zu verbessern. Sie können Cookies jederzeit in den <strong>Browsereinstellungen</strong> deaktivieren.</p>
@@ -32,14 +31,14 @@ import Layout from "../components/layout.astro";
 </Layout>
 
 <style>
-  /* ✅ Hintergrundfarbe statt Bild */
+  /* ✅ Hintergrund & Grundlayout */
   body {
     background: #1c1c1c;
     color: #f5f5f5;
     font-family: Arial, sans-serif;
   }
 
-  /* ✅ Container für den Datenschutzbereich */
+  /* ✅ Hauptcontainer */
   .privacy-container {
     max-width: 800px;
     margin: 50px auto;
@@ -50,7 +49,7 @@ import Layout from "../components/layout.astro";
     text-align: left;
   }
 
-  /* ✅ Titel */
+  /* ✅ Überschriften */
   h1 {
     font-size: 32px;
     font-weight: bold;
@@ -65,11 +64,13 @@ import Layout from "../components/layout.astro";
     margin-top: 20px;
   }
 
+  /* ✅ Text */
   p {
     font-size: 16px;
     line-height: 1.6;
   }
 
+  /* ✅ Link-Styling */
   .privacy-link {
     color: #4ea8de;
     font-weight: bold;
@@ -81,7 +82,7 @@ import Layout from "../components/layout.astro";
     color: #FFD700;
   }
 
-  /* ✅ Letzte Aktualisierung */
+  /* ✅ Letztes Update */
   .last-updated {
     margin-top: 30px;
     font-size: 14px;

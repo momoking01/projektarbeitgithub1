@@ -28,21 +28,21 @@ import Layout from "../components/layout.astro";
 </Layout>
 
 <style>
-/* ✅ Hintergrund für die Contact-Seite */
-.contact-container {
+  /* ✅ Hauptcontainer mit dunklem Verlaufshintergrund */
+  .contact-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #1a1a2e, #16213e); /* Eleganter Dunkelblau-Verlauf */
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
     color: white;
     text-align: center;
     padding: 40px;
-}
+  }
 
-/* ✅ Kontakt-Box */
-.contact-box {
+  /* ✅ Box für jede Kontaktperson */
+  .contact-box {
     background: rgba(255 255 255 / 10%);
     padding: 20px;
     border-radius: 10px;
@@ -50,36 +50,38 @@ import Layout from "../components/layout.astro";
     width: 80%;
     max-width: 600px;
     box-shadow: 0 4px 8px rgb(0 0 0 / 50%);
-}
+    margin-bottom: 20px;
+  }
 
-/* ✅ Titel */
-.contact-container h1 {
+  /* ✅ Überschrift */
+  .contact-container h1 {
     font-size: 36px;
     font-weight: bold;
     color: #FFD700;
     text-shadow: 2px 2px 5px rgba(0 0 0 / 70%);
-}
+  }
 
-/* ✅ Kontakt-Details */
-.contact-container h2 {
+  /* ✅ Kontaktperson-Namen */
+  .contact-container h2 {
     font-size: 22px;
     margin-top: 15px;
     color: #FFD700;
-}
+  }
 
-.contact-container p {
+  /* ✅ Textelemente */
+  .contact-container p {
     font-size: 18px;
     opacity: 0.9;
-}
+  }
 
-/* ✅ Links */
-.contact-container a {
+  /* ✅ E-Mail-Links */
+  .contact-container a {
     color: #FFD700;
     font-weight: bold;
     text-decoration: none;
-}
+  }
 
-.contact-container a:hover {
+  .contact-container a:hover {
     text-decoration: underline;
-}
+  }
 </style>

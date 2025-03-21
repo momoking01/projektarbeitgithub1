@@ -1,18 +1,19 @@
----
-import Layout from "../components/layout.astro";
----
 
-<Layout>
   <div class="auth-container">
-    <h1>Login</h1>
-    <label for="role">Choose your role:</label>
-    <select id="role">
-      <option value="client">Client</option>
-      <option value="admin">Admin</option>
-    </select>
-    <button id="loginButton">Login</button>
+    <div class="login-box">
+      <h1>Login</h1>
+      <p>Choose your role to continue:</p>
+
+      <label for="role"><strong>Role:</strong></label>
+      <select id="role">
+        <option value="client">Client</option>
+        <option value="admin">Admin</option>
+      </select>
+
+      <button id="loginButton">Login</button>
+    </div>
   </div>
-</Layout>
+
 
 <script is:inline>
   function setUserRole() {
@@ -36,19 +37,88 @@ import Layout from "../components/layout.astro";
 
   window.onload = checkUserRole;
 
-  // Button-EventListener hinzufügen (empfohlene Methode)
   document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("loginButton").addEventListener("click", setUserRole);
   });
 </script>
 
 <style>
-  .auth-container {
-    text-align: center;
-    padding: 20px;
+  /* Hintergrund setzen, kein Bild */
+  body {
+    background: #1a1a1a;
+    margin: 0;
+    overflow: hidden; /* Entfernt die Scroll-Leisten */
   }
 
-  .auth-container select, .auth-container button {
-    margin: 10px;
+  /* Zentrierte Auth-Container */
+  .auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+
+  /* Login-Box */
+  .login-box {
+    background: #2d2d2d;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0 0 0 / 50%);
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  /* Titel */
+  .login-box h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 2px 2px 6px rgba(0 0 0 / 80%);
+    margin-bottom: 10px;
+  }
+
+  /* Text */
+  .login-box p {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 15px;
+  }
+
+  /* Label */
+  .login-box label {
+    font-size: 16px;
+    color: #fff;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  /* Dropdown */
+  .login-box select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    background: #444;
+    color: #fff;
+    border: 1px solid #555;
+    margin-bottom: 15px;
+  }
+
+  /* Login-Button */
+  .login-box button {
+    background: #FFD700;
+    color: black;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    width: 100%;
+  }
+
+  .login-box button:hover {
+    background: #FFA500;
   }
 </style>

@@ -11,25 +11,24 @@
     <meta content="Syrian Restaurant Team" name="author" />
     <meta content="https://momoking01.github.io/projektarbeitgithub1/" name="canonical" />
 
-    <!-- Preload & Performance -->
+    <!-- ✅ Performance Optimierungen -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net" rel="preconnect">
     <link as="style" href="/projektarbeitgithub1/styles.css" rel="preload">
 
-    <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+    <!-- ✅ Open Graph & Twitter Meta Tags -->
     <meta content="website" property="og:type">
     <meta content="Syrian Restaurant - Best Food Experience" property="og:title">
     <meta content="Enjoy the best Syrian food experience with fresh ingredients and authentic taste. Visit our restaurant today!" property="og:description">
     <meta content="https://momoking01.github.io/projektarbeitgithub1/image.jpg" property="og:image">
     <meta content="https://momoking01.github.io/projektarbeitgithub1/" property="og:url">
 
-    <!-- Twitter Meta Tags -->
     <meta content="summary_large_image" name="twitter:card">
     <meta content="Syrian Restaurant - Best Food Experience" name="twitter:title">
     <meta content="Enjoy the best Syrian food experience with fresh ingredients and authentic taste." name="twitter:description">
     <meta content="https://momoking01.github.io/projektarbeitgithub1/image.jpg" name="twitter:image">
 
-    <!-- ✅ Strukturierte Daten (Schema.org für Google Rich Results) -->
+    <!-- ✅ Strukturierte Daten für Google Rich Results -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -51,30 +50,30 @@
       }
     </script>
 
-    <!-- Favicon -->
+    <!-- ✅ Favicon -->
     <link href="/projektarbeitgithub1/favicon.svg" rel="icon" type="image/png">
     <link href="/projektarbeitgithub1/styles.css" rel="stylesheet">
   </head>
 
   <body>
-    <!-- ✅ Modernisierte Navigation -->
+    <!-- ✅ Navigation -->
     <header>
       <nav>
         <ul>
+          <li><a href="/projektarbeitgithub1/contact">Contact</a></li>
           <li><a href="/projektarbeitgithub1/">Home</a></li>
           <li><a href="/projektarbeitgithub1/menu">Menu</a></li>
-          <li><a href="/projektarbeitgithub1/contact">Contact</a></li>
-          <li><a href="/projektarbeitgithub1/cart">🛒 Cart</a></li>
           <li><a href="/projektarbeitgithub1/orders">📜 Order History</a></li>
+          <li><a href="/projektarbeitgithub1/cart">🛒 Cart</a></li>
         </ul>
-      </nav>
+      </nav>        
     </header>
 
     <main>
       <slot />
     </main>
 
-    <!-- ✅ Verbesserter Footer -->
+    <!-- ✅ Footer -->
     <footer>
       <p>&copy; 2024 Syrian Restaurant. All rights reserved.</p>
       <p>
@@ -83,7 +82,7 @@
       </p>
     </footer>
 
-    <!-- ✅ Cookie-Zustimmungsbanner mit DSGVO-Optionen -->
+    <!-- ✅ Cookie-Zustimmungsbanner -->
     <div class="cookie-banner" id="cookie-banner">
       <p>Diese Website verwendet Cookies, um die Benutzerfreundlichkeit zu verbessern.</p>
       <button id="accept-cookies">Akzeptieren</button>
@@ -110,83 +109,5 @@
       });
     });
     </script>
-
-    <style>
-      /* ✅ Verbesserte Navigation */
-      header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: rgba(0 0 0 / 85%);
-        padding: 10px 0;
-        z-index: 1000;
-      }
-
-      nav ul {
-        display: flex;
-        justify-content: center;
-        list-style: none;
-        padding: 0;
-      }
-
-      nav ul li {
-        margin: 0 15px;
-      }
-
-      nav ul li a {
-        color: white;
-        font-size: 18px;
-        font-weight: bold;
-        text-decoration: none;
-        transition: color 0.3s;
-      }
-
-      nav ul li a:hover {
-        color: #ff9800;
-      }
-
-      /* ✅ Verbesserter Footer */
-      footer {
-        background-color: #222;
-        color: white;
-        text-align: center;
-        padding: 15px;
-        margin-top: 20px;
-      }
-
-      .footer-link {
-        color: #FFD700;
-        text-decoration: none;
-        font-weight: bold;
-      }
-
-      .footer-link:hover {
-        text-decoration: underline;
-      }
-
-      /* ✅ Cookie Banner */
-      .cookie-banner {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: rgba(0 0 0 / 90%);
-        color: white;
-        padding: 12px;
-        text-align: center;
-        display: none;
-      }
-
-      .cookie-banner button {
-        background: #ff9800;
-        color: white;
-        border: none;
-        padding: 6px 12px;
-        margin-left: 10px;
-        cursor: pointer;
-        font-weight: bold;
-        border-radius: 5px;
-      }
-    </style>
   </body>
 </html>

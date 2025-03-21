@@ -1,39 +1,25 @@
 ---
 import Layout from "../components/layout.astro";
 
-// Ermittlung des richtigen Hintergrundbilds
-const background = Astro.url.pathname.includes('checkout')
-  ? "/projektarbeitgithub1/menu-bg.png"
-  : "/projektarbeitgithub1/menu-bg.png"; // Falls Checkout ein anderes Bild haben soll, ändere dies.
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Website</title>
-    <link href="/public/styles.css" rel="stylesheet">
-  </head>
-  <body style={`background: url('${background}') no-repeat center center fixed; background-size: cover;`}>
-    <slot />
-  </body>
-</html>
-
 <Layout>
-  <div class="checkout-container">
-    <h1>Checkout</h1>
-    <p><strong>Total Items:</strong> <span id="total-items">0</span></p>
+  <div class="checkout-page">
+    <div class="checkout-container">
+      <h1>Checkout</h1>
+      <p><strong>Total Items:</strong> <span id="total-items">0</span></p>
 
-    <h2>Order Summary</h2>
-    <ul id="order-summary"></ul>
+      <h2>Order Summary</h2>
+      <ul id="order-summary"></ul>
 
-    <h2>Payment Method</h2>
-    <select id="payment-method">
-      <option value="cash">Cash</option>
-      <option value="sepa">SEPA Direct Debit</option>
-    </select>
+      <h2>Payment Method</h2>
+      <select id="payment-method">
+        <option value="cash">Cash</option>
+        <option value="sepa">SEPA Direct Debit</option>
+      </select>
 
-    <button class="place-order-btn" onclick="placeOrder()">🛒 Place Order</button>
+      <button class="place-order-btn" onclick="placeOrder()">🛒 Place Order</button>
+    </div>
   </div>
 </Layout>
 
@@ -92,62 +78,16 @@ const background = Astro.url.pathname.includes('checkout')
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("place-order-btn").addEventListener("click", placeOrder);
+    document.getElementById("place-order-btn")?.addEventListener("click", placeOrder);
   });
 
   window.onload = loadCartSummary;
 </script>
 
 <style>
-   /* ✅ Hintergrundbild für Checkout-Seite */
-   body {
+  /* ✅ Sicherstellen, dass NUR der Warenkorb ein eigenes Hintergrundbild hat */
+  body {
     background: url("{backgroundImage}") no-repeat center center fixed;
     background-size: cover;
-  }
-
-  /* ✅ Checkout-Box Styling */
-  .checkout-container {
-    background: rgba(0 0 0 / 60%); /* Dunkler Hintergrund mit Transparenz */
-    color: #F5E6C1; /* Helles Beige für bessere Lesbarkeit */
-    text-align: center;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0 0 0 / 60%);
-    max-width: 500px;
-    margin: auto;
-    margin-top: 50px;
-  }
-
-  /* ✅ Überschriften schöner gestalten */
-  .checkout-container h1,
-  .checkout-container h2 {
-    text-shadow: 2px 2px 5px rgba(0 0 0 / 60%);
-    font-weight: bold;
-  }
-
-  /* ✅ Dropdown-Menü Styling */
-  .checkout-container select {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background: #222;
-    color: white;
-    font-weight: bold;
-  }
-
-  /* ✅ Buttons neu gestalten */
-  .place-order-btn {
-    background: #28A745; /* Kräftiges Grün */
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .place-order-btn:hover {
-    background: #218838; /* Dunkleres Grün */
   }
 </style>

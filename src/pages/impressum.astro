@@ -39,7 +39,7 @@ import Layout from "../components/layout.astro";
 </Layout>
 
 <style>
-  /* ✅ Hintergrundfarbe statt Bild */
+  /* ✅ Seitenhintergrund */
   body {
     background: #1c1c1c;
     color: #f5f5f5;
@@ -48,19 +48,18 @@ import Layout from "../components/layout.astro";
     overflow-y: auto;
   }
 
-  /* ✅ Container für das Impressum */
+  /* ✅ Hauptcontainer */
   .impressum-container {
     max-width: 800px;
     margin: 50px auto;
-    padding: 30px;
+    padding: 30px 20px 75px;
     background: rgba(255 255 255 / 10%);
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0 0 0 / 50%);
     text-align: left;
-    padding-bottom: 75px;
   }
 
-  /* ✅ Titel */
+  /* ✅ Überschriften */
   h1 {
     font-size: 32px;
     font-weight: bold;
@@ -75,11 +74,13 @@ import Layout from "../components/layout.astro";
     margin-top: 20px;
   }
 
+  /* ✅ Standard-Text */
   p {
     font-size: 16px;
     line-height: 1.6;
   }
 
+  /* ✅ E-Mail-Link */
   .impressum-link {
     color: #4ea8de;
     font-weight: bold;
@@ -91,7 +92,7 @@ import Layout from "../components/layout.astro";
     color: #FFD700;
   }
 
-  /* ✅ Letzte Aktualisierung */
+  /* ✅ Letztes Update */
   .last-updated {
     margin-top: 30px;
     font-size: 14px;
