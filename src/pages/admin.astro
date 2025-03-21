@@ -60,11 +60,11 @@ import Layout from "../components/layout.astro";
 
     products.forEach((product, index) => {
       let li = document.createElement("li");
-      li.classList.add("admin-item"); // 💡 Klasse wird aktiv zugewiesen
+      li.classList.add("admin-item");
 
       let span = document.createElement("span");
       span.textContent = product;
-      span.classList.add("admin-product-name"); // 💡 Klasse wird aktiv zugewiesen
+      span.classList.add("admin-product-name");
 
       let removeBtn = document.createElement("button");
       removeBtn.textContent = "Remove";
@@ -124,27 +124,29 @@ import Layout from "../components/layout.astro";
     justify-content: space-between;
     align-items: center;
     background: rgba(255 255 255 / 15%);
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 12px;
     box-shadow: 0 2px 5px rgba(0 0 0 / 40%);
     width: 100%;
   }
 
+  /* ✅ Admin-Produkt-Name jetzt identisch mit dem normalen Menü */
   .admin-product-name {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
-    color: #FFD700;
+    color: white;
     flex-grow: 1;
     text-align: left;
-    padding-left: 10px;
+    padding-left: 12px;
   }
 
+  /* ✅ Admin-Buttons jetzt in Gelb */
   .admin-button {
-    background: #FF4500;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
+    background: #FFD700;
+    color: black;
+    padding: 12px 18px;
+    border-radius: 8px;
     font-weight: bold;
     border: none;
     cursor: pointer;
@@ -152,6 +154,6 @@ import Layout from "../components/layout.astro";
   }
 
   .admin-button:hover {
-    background: #D63000;
+    background: #FFA500;
   }
 </style>
