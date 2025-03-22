@@ -14,38 +14,74 @@ npm create astro@latest -- --template basics
 
 ## 🚀 Project Structure 
 
-Inside of this Astro project, you'll see the following folders and files:
+This document describes the directory structure of the project and the function of the most important files and folders.
+
+Main Directories:
 
 ```text
 /
-├──.github/workflows/
-|   └── deploy.yml
-├──.vscode
-|   ├── extensions.json
-|   └── launch.json
+├── .astro/
+│   ├── settings.json
+│   ├── types.d.ts
+│
+├── .github/workflows/
+│   ├── deploy.yml
+│
+├── .vscode/
+│   ├── extensions.json
+│   ├── launch.json
+│
+├── node_modules/
+│
+├── playwright-report/
+│   ├── data/
+│   ├── trace/
+│   ├── index.html
+│
 ├── public/
-|   ├── Contact.image/
-|         └── image2.png
-│   ├── Menu.image/
-|         └── image1.png
+│   ├── Contact.image/
+│   │   ├── image2.png
+│   ├── optimized/
 │   ├── favicon.svg
-│   ├── image.jpg
-|   ├── index.css
-│   └── styles.css
+│   ├── image.png
+│   ├── index.css
+│   ├── menu-bg.png
+│   ├── styles.css
+│
+├── scripts/
+│   ├── convertImages.js
+│   ├── syncToDropbox.js
+│
+├── server/
+│   ├── orders.json
+│   ├── server.js
+│
 ├── src/
 │   ├── components/
 │   │   ├── card.astro
-│   │   └── layout.astro
+│   │   ├── layout.astro
 │   ├── pages/
+│   │   ├── admin.astro
+│   │   ├── auth.astro
+│   │   ├── cart.astro
+│   │   ├── checkout.astro
 │   │   ├── contact.astro
+│   │   ├── impressum.astro
 │   │   ├── index.astro
 │   │   ├── index.js
-|   |   └── menu.astro
-│   └── env.d.ts
+│   │   ├── menu.astro
+│   │   ├── orders.astro
+│   │   ├── privacy.astro
+│   ├── env.d.ts
+│
+├── test-results/
+│
 ├── tests/
-│   └── example.spec.ts
+│   ├── example.spec.ts
+│
 ├── tests-examples/
-│   └── ts demo-todo-app.spec.ts
+│   ├── demo-todo-app.spec.ts
+│
 ├── .gitignore
 ├── astro.config.mjs
 ├── eslint.config.js
@@ -54,7 +90,80 @@ Inside of this Astro project, you'll see the following folders and files:
 ├── playwright.config.ts
 ├── README.md
 ├── stylelint.config.cjs
-└── tsconfig.json
+├── tsconfig.json
+
+
+## Description of Key Files and Folders
+
+### `.astro/`
+- **settings.json**: Configuration file for Astro.
+- **types.d.ts**: Type declaration file for Astro projects.
+
+### `.github/workflows/`
+- **deploy.yml**: Contains the GitHub Actions configuration for the deployment process.
+
+### `.vscode/`
+- **extensions.json**: Recommended VS Code extensions for the project.
+- **launch.json**: Configuration file for debugging in VS Code.
+
+### `public/`
+This directory contains static assets such as images and stylesheets.
+- **Contact.image/**: Contains `image2.png`.
+- **optimized/**: Directory for optimized images.
+- **favicon.svg**: The favicon for the website.
+- **image.png**: General image for the website.
+- **index.css**: CSS file for styling the website.
+- **menu-bg.png**: Background image for the menu.
+- **styles.css**: Additional styles for the website.
+
+### `scripts/`
+- **convertImages.js**: Script for image conversion.
+- **syncToDropbox.js**: Script for synchronization with Dropbox.
+
+### `server/`
+- **orders.json**: Contains order data.
+- **server.js**: Backend server logic.
+
+### `src/`
+The main source code of the project is located in this directory.
+- **components/**: Contains reusable UI components.
+  - `card.astro`: A card component.
+  - `layout.astro`: Defines the main layout of the application.
+- **pages/**: Contains the application's pages.
+  - `admin.astro`: Admin section.
+  - `auth.astro`: Authentication page.
+  - `cart.astro`: Shopping cart page.
+  - `checkout.astro`: Checkout page.
+  - `contact.astro`: Contact page.
+  - `impressum.astro`: Impressum (legal information) page.
+  - `index.astro`: Homepage.
+  - `index.js`: JavaScript logic for the main page.
+  - `menu.astro`: Menu page.
+  - `orders.astro`: Order overview page.
+  - `privacy.astro`: Privacy policy page.
+
+### `test-results/`
+- Contains test run results.
+
+### `tests/`
+- **example.spec.ts**: Example test case.
+
+### `tests-examples/`
+- **demo-todo-app.spec.ts**: Another example test case.
+
+## Important Configuration Files
+- **.gitignore**: Lists files to be ignored by Git.
+- **astro.config.mjs**: Configuration file for Astro.
+- **eslint.config.js**: Configuration file for ESLint.
+- **package-lock.json**: Contains exact versions of installed packages.
+- **package.json**: Contains metadata about the project and its dependencies.
+- **playwright.config.ts**: Configuration file for Playwright tests.
+- **README.md**: Project documentation.
+- **stylelint.config.cjs**: Configuration file for Stylelint.
+- **tsconfig.json**: TypeScript configuration file.
+- **env.d.ts**: Type declaration file for environment variables.
+
+This project structure facilitates code organization and scalability. If further explanations are needed for specific files, they can be added.
 
 
 
@@ -75,7 +184,20 @@ All commands are run from the root of the project, from a terminal:
 | eslint eslint-plugin-astro        | Installs EsLint                                  |
 | npm install --save-dev            |                                                  |
 | postcss-html stylelint-config-html| Installs StyleLint                               |
-| node scripts/convertImages.js     | bilder optimieren                                |
+| node scripts/convertImages.js     | optimize images                                  |
+
+
+
+| programm lokal testen                                                                | 
+| :----------------------------------------------------------------------------------- | 
+| npm run lint                                                                         | 
+| npx playwright install --with-deps --> (install playwright browser)                  | 
+| npm run test                                                                         |
+| npx playwright show-trace test-results/example-navigation-to-menu-chromium/trace.zip |
+| npx playwright test --ui                                                             |
+
+
+
 
 
 powershell commands:
@@ -112,17 +234,6 @@ Invoke-RestMethod -Uri "http://projektarbeitgithub1.onrender.com/orders/17424874
   ],
   "payment": "sepa"
 }'
-
-
-
-
-| programm lokal testen                                                                | 
-| :----------------------------------------------------------------------------------- | 
-| npm run lint                                                                         | 
-| npx playwright install --with-deps --> (install playwright browser)                  | 
-| npm run test                                                                         |
-| npx playwright show-trace test-results/example-navigation-to-menu-chromium/trace.zip |
-| npx playwright test --ui                                                             |
 
 
 
