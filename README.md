@@ -163,7 +163,6 @@ The main source code of the project is located in this directory.
 - **tsconfig.json**: TypeScript configuration file.
 - **env.d.ts**: Type declaration file for environment variables.
 
-This project structure facilitates code organization and scalability. If further explanations are needed for specific files, they can be added.
 
 
 
