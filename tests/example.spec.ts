@@ -44,12 +44,15 @@ test('navigation to contact page and check contact info', async ({ page }) => {
   await expect(page).toHaveURL('http://localhost:4321/projektarbeitgithub1/contact');
 
   // Check contact details for Reem, Qusai, and Mohamad
-  const contactReem = page.locator('text=Contact Reem');
-  await expect(contactReem).toBeVisible();
+  const contactNaser = page.locator('text=Contact Mohamad Al Naser');
+  await expect(contactNaser).toBeVisible();
 
-  const contactQusai = page.locator('text=Contact Qusai');
+  const contactQusai = page.locator('text=Contact Qusai Falihan');
   await expect(contactQusai).toBeVisible();
 
-  const contactMohamad = page.locator('text=Contact Mohamad');
+  const contactMohamad = page.locator('text=Contact Mohamad Hamoudeh');
   await expect(contactMohamad).toBeVisible();
+
+  const contactOmran = page.locator('text=Contact Mhd Omran Al Rahban');
+  await expect(contactOmran).toBeVisible();
 });
