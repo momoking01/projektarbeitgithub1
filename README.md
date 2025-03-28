@@ -21,9 +21,11 @@ Frontend: **Astro** ✨ | Backend: **Express.js** 🚀 | Datenbank: **Supabase**
 - 📦 **API Endpoint (Render)**:  
   [https://projektarbeitgithub1.onrender.com/orders](https://projektarbeitgithub1.onrender.com/orders)
 
-> ⚠️ **Hinweis**:  
-> Render verwendet eine kostenlose Instanz, die sich bei Inaktivität automatisch in den Ruhemodus versetzt.  
-> Beim ersten Zugriff nach längerer Pause kann die Antwortzeit **50 Sekunden oder mehr** betragen.
+⚠️ **Hinweis**:  
+Render verwendet eine kostenlose Instanz, die sich bei Inaktivität automatisch in den Ruhemodus versetzt.  
+Beim **ersten Zugriff nach längerer Pause** kann die Antwortzeit **50 Sekunden oder mehr** betragen.
+
+➡️ **Tipp**: Um die Render-API schnell zu aktivieren, einfach den obigen API-Link aufrufen – die Instanz wird dadurch in wenigen Sekunden aufgeweckt.
 
 
 ---
