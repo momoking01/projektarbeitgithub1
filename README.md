@@ -9,6 +9,39 @@ Frontend: **Astro** ✨ | Backend: **Express.js** 🚀 | Datenbank: **Supabase**
 ![Playwright Tests](https://img.shields.io/badge/Tests-Playwright-04AA6D?logo=playwright)
 
 ---
+### 📝 Projektübersicht
+
+Diese Web-App simuliert ein **Online-Bestellsystem für ein syrisches Restaurant**.  
+Sie besteht aus einem öffentlichen Kundenbereich (Frontend) und einem Admin-System im Hintergrund (Backend/API).
+
+---
+
+## 👨‍🍳 Funktionen für Kunden (Frontend)
+
+- 🛒 Speisekarte ansehen (`☰ Menu`) und Produkte in den Warenkorb (`🛒 Cart`) legen  
+- 💳 Zahlungsmethode auswählen (Bar oder SEPA)  
+- ✅ Bestellung absenden (wird in Supabase gespeichert)  
+- 📦 Eigene Bestellungen im Verlauf einsehen (`📜 Order History`)
+
+---
+
+## 🛠️ Funktionen für Admins
+
+### 🧑‍💼 Im **Frontend** (nach Login):
+
+- ➕ Produkte hinzufügen (Speisekarte erweitern)  
+- 🔐 Zugriff auf Admin-Ansicht unter `/auth`
+
+### 🔧 Im **Backend (API)**:
+
+- 📋 Alle Bestellungen abrufen (`GET /orders`)  
+- ➕ Neue Bestellung über API einfügen (`POST /orders`)  
+- 🧹 Alle Bestellungen löschen (`DELETE /orders`)  
+- 🗑️ Einzelne Bestellung per ID löschen (`DELETE /orders/:id`)  
+- ✏️ Bestehende Bestellung per ID aktualisieren (`PUT /orders/:id`)
+
+---
+
 
 ## 🌐 Live-Versionen
 
