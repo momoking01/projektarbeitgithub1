@@ -258,6 +258,12 @@ Invoke-RestMethod -Uri "https://projektarbeitgithub1.onrender.com/orders" -Metho
 }'
 ```
 
+Alle Bestellungen abrufen (GET)
+```bash
+Invoke-RestMethod -Uri "https://projektarbeitgithub1.onrender.com/orders"
+```
+
+
 Bestellung ändern (PUT)
 ```bash
 Invoke-RestMethod -Uri "https://projektarbeitgithub1.onrender.com/orders/(ID ERSETZEN)" -Method Put -Headers @{"Content-Type"="application/json"} -Body '{
