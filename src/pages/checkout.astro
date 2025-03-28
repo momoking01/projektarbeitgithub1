@@ -65,7 +65,6 @@ const background = Astro.url.pathname.includes('checkout')
     }
 
     const paymentMethod = document.getElementById("payment-method").value;
-
     const newOrder = {
       items: cart,
       payment: paymentMethod
@@ -78,15 +77,13 @@ const background = Astro.url.pathname.includes('checkout')
         body: JSON.stringify(newOrder)
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to place order.");
-      }
+      if (!response.ok) throw new Error("Failed to place order.");
 
       localStorage.removeItem("cart");
-      alert("Order placed successfully!");
+      alert("✅ Order placed successfully!");
       window.location.href = "/projektarbeitgithub1/orders";
     } catch (error) {
-      console.error("Error:", error);
+      console.error("❌ Error placing order:", error);
       alert("Something went wrong. Try again later.");
     }
   }
