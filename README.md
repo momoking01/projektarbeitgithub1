@@ -21,6 +21,10 @@ Frontend: **Astro** ✨ | Backend: **Express.js** 🚀 | Datenbank: **Supabase**
 - 📦 **API Endpoint (Render)**:  
   [https://projektarbeitgithub1.onrender.com/orders](https://projektarbeitgithub1.onrender.com/orders)
 
+> ⚠️ **Hinweis**:  
+> Render verwendet eine kostenlose Instanz, die sich bei Inaktivität automatisch in den Ruhemodus versetzt.  
+> Beim ersten Zugriff nach längerer Pause kann die Antwortzeit **50 Sekunden oder mehr** betragen.
+
 
 ---
 
@@ -149,6 +153,9 @@ Hauptverzeichnisse:
 - [Node.js](https://nodejs.org/) (empfohlen: Version 18+)
 - [npm](https://www.npmjs.com/)
 - optional: [Playwright](https://playwright.dev/) für Testing (`npx playwright install --with-deps`)
+  
+> ⚠️ **Hinweis**: Stelle sicher, dass der Installationspfad von Node.js in den Umgebungsvariablen (`Path`) deines Systems enthalten ist.  
+> Andernfalls können Befehle wie `node` im Terminal nicht ausgeführt werden.
 
 ---
 
@@ -162,9 +169,11 @@ Hauptverzeichnisse:
 4. Zielordner wählen → `Clone` klicken  
 5. Öffne das Projekt in deinem Editor (z. B. VS Code)
 
+
 ---
 
 #### 💻 2. Mit Git CLI (für Terminal-Nutzer)
+> 📌 Verwende **Git Bash** oder ein beliebiges Terminal, in dem Git verfügbar ist (z. B. VS Code Terminal oder PowerShell mit installiertem Git).
 
 ```bash
 git clone https://github.com/momoking01/projektarbeitgithub1.git
