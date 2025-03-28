@@ -84,19 +84,32 @@ app.delete("/orders", async (req, res) => {
 
 // ✅ DELETE: Bestellung nach ID löschen
 app.delete("/orders/:id", async (req, res) => {
-  const { id } = req.params;
-  const { error } = await supabase.from("syrian-restaurant").delete().eq("id", id);
+  const id = parseInt(req.params.id, 10); // ✅ ID zu Integer
+  if (isNaN(id)) {
+    return res.status(400).json({ error: "Invalid ID format." });
+  }
+
+  const { error } = await supabase
+    .from("syrian-restaurant")
+    .delete()
+    .eq("id", id);
+
   if (error) {
     console.error("❌ Error deleting order:", error.message);
     return res.status(500).json({ error: "Error deleting order." });
   }
+
   res.json({ message: `Order with ID ${id} deleted.` });
 });
 
 // ✅ PUT: Bestellung aktualisieren
 app.put("/orders/:id", async (req, res) => {
-  const { id } = req.params;
+  const id = parseInt(req.params.id, 10); // ✅ ID zu Integer
   const updatedOrder = req.body;
+
+  if (isNaN(id)) {
+    return res.status(400).json({ error: "Invalid ID format." });
+  }
 
   if (!updatedOrder || !updatedOrder.items || updatedOrder.items.length === 0) {
     return res.status(400).json({ error: "Invalid order format." });
