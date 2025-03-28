@@ -1,28 +1,54 @@
-# Astro Starter Kit: Basics
+# 🥙 Projektarbeit: Syrian Restaurant Web App
 
-```sh
-npm create astro@latest -- --template basics
-```
+**Fullstack-Webanwendung für Online-Bestellungen**  
+Frontend: **Astro** ✨ | Backend: **Express.js** 🚀 | Datenbank: **Supabase** 🏕️
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+![Astro](https://img.shields.io/badge/Astro-%F0%9F%92%A1-blueviolet?logo=astro)
+![Express](https://img.shields.io/badge/Express.js-%F0%9F%9A%80-black?logo=express)
+![Supabase](https://img.shields.io/badge/Supabase-%F0%9F%8F%95-green?logo=supabase)
+![Playwright Tests](https://img.shields.io/badge/Tests-Playwright-04AA6D?logo=playwright)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 🌐 Live-Versionen
 
-## 🚀 Project Structure 
+- 🔗 **Frontend (Kundensicht)**:  
+  [https://momoking01.github.io/projektarbeitgithub1/](https://momoking01.github.io/projektarbeitgithub1/)
 
-This document describes the directory structure of the project and the function of the most important files and folders.
+- 👨‍💻 **Admin Login**:  
+  [https://momoking01.github.io/projektarbeitgithub1/auth](https://momoking01.github.io/projektarbeitgithub1/auth)
 
-Main Directories:
+- 📦 **API Endpoint (Render)**:  
+  [https://projektarbeitgithub1.onrender.com/orders](https://projektarbeitgithub1.onrender.com/orders)
+
+
+---
+
+## 🛠️ Verwendete Technologien
+
+| Bereich         | Technologie                    |
+|----------------|--------------------------------|
+| **Frontend**    | [Astro](https://astro.build/) (HTML, CSS, JavaScript) |
+| **Backend**     | [Express.js](https://expressjs.com/) (Node.js) |
+| **API Hosting** | [Render](https://render.com/) |
+| **Datenbank**   | [Supabase](https://supabase.com/) (PostgreSQL + REST API) |
+| **Testing**     | [Playwright](https://playwright.dev/) |
+| **Styling**     | Vanilla CSS, Astro Stylesheets |
+| **Linting**     | ESLint, Stylelint |
+
+---
+
+
+## 🧱 Projektstruktur
+
+Dieses Dokument beschreibt die Verzeichnisstruktur des Projekts und die Funktion der wichtigsten Dateien und Ordner.
+
+Hauptverzeichnisse:
 
 ```text
 /
 ├── .astro/
 │   ├── settings.json
-│   ├── types.d.ts
 │
 ├── .github/workflows/
 │   ├── deploy.yml
@@ -39,9 +65,8 @@ Main Directories:
 │   ├── index.html
 │
 ├── public/
-│   ├── Contact.image/
-│   │   ├── image2.png
 │   ├── optimized/
+│   │   ├── image.webp
 │   ├── favicon.svg
 │   ├── image.png
 │   ├── index.css
@@ -53,7 +78,6 @@ Main Directories:
 │   ├── syncToDropbox.js
 │
 ├── server/
-│   ├── orders.json
 │   ├── server.js
 │
 ├── src/
@@ -91,152 +115,177 @@ Main Directories:
 ├── README.md
 ├── stylelint.config.cjs
 ├── tsconfig.json
+```
 
 
-## Description of Key Files and Folders
+---
 
-### `.astro/`
-- **settings.json**: Configuration file for Astro.
-- **types.d.ts**: Type declaration file for Astro projects.
+## 🧩 Architekturübersicht
 
-### `.github/workflows/`
-- **deploy.yml**: Contains the GitHub Actions configuration for the deployment process.
+- **Frontend**  
+  Astro erzeugt eine statische Single Page App (SPA). Die Seiten wie `index.astro`, `cart.astro`, `checkout.astro`, `orders.astro` usw. sind in `src/pages/` definiert.
 
-### `.vscode/`
-- **extensions.json**: Recommended VS Code extensions for the project.
-- **launch.json**: Configuration file for debugging in VS Code.
+- **Backend (API)**  
+  Die Datei `server/server.js` enthält eine Express.js REST-API.  
+  Diese verarbeitet:
+  
+    | Methode | Pfad                 | Beschreibung                      |
+    |--------:|----------------------|-----------------------------------|
+    | GET     | `/orders`            | Alle Bestellungen abrufen         |
+    | POST    | `/orders`            | Neue Bestellung speichern         |
+    | DELETE  | `/orders`            | Alle Bestellungen löschen         |
+    | DELETE  | `/orders/:id`        | Bestellung mit ID löschen         |
+    | PUT     | `/orders/:id`        | Bestellung mit ID aktualisieren   |
 
-### `public/`
-This directory contains static assets such as images and stylesheets.
-- **Contact.image/**: Contains `image2.png`.
-- **optimized/**: Directory for optimized images.
-- **favicon.svg**: The favicon for the website.
-- **image.png**: General image for the website.
-- **index.css**: CSS file for styling the website.
-- **menu-bg.png**: Background image for the menu.
-- **styles.css**: Additional styles for the website.
+- **Datenhaltung**  
+  Alle Bestellungen werden **nicht mehr lokal**, sondern in **Supabase** (Cloud-PostgreSQL) dauerhaft gespeichert. Zugriff erfolgt via Supabase-REST-API aus dem Server.
 
-### `scripts/`
-- **convertImages.js**: Script for image conversion.
-- **syncToDropbox.js**: Script for synchronization with Dropbox.
+---
 
-### `server/`
-- **orders.json**: Contains order data.
-- **server.js**: Backend server logic.
+## 💻 Lokale Installation & Ausführung
 
-### `src/`
-The main source code of the project is located in this directory.
-- **components/**: Contains reusable UI components.
-  - `card.astro`: A card component.
-  - `layout.astro`: Defines the main layout of the application.
-- **pages/**: Contains the application's pages.
-  - `admin.astro`: Admin section.
-  - `auth.astro`: Authentication page.
-  - `cart.astro`: Shopping cart page.
-  - `checkout.astro`: Checkout page.
-  - `contact.astro`: Contact page.
-  - `impressum.astro`: Impressum (legal information) page.
-  - `index.astro`: Homepage.
-  - `index.js`: JavaScript logic for the main page.
-  - `menu.astro`: Menu page.
-  - `orders.astro`: Order overview page.
-  - `privacy.astro`: Privacy policy page.
+### 🧩 Voraussetzungen
 
-### `test-results/`
-- Contains test run results.
+- [Node.js](https://nodejs.org/) (empfohlen: Version 18+)
+- [npm](https://www.npmjs.com/)
+- optional: [Playwright](https://playwright.dev/) für Testing (`npx playwright install --with-deps`)
 
-### `tests/`
-- **example.spec.ts**: Example test case.
+---
 
-### `tests-examples/`
-- **demo-todo-app.spec.ts**: Another example test case.
+### 📥 Projekt aus GitHub klonen
 
-## Important Configuration Files
-- **.gitignore**: Lists files to be ignored by Git.
-- **astro.config.mjs**: Configuration file for Astro.
-- **eslint.config.js**: Configuration file for ESLint.
-- **package-lock.json**: Contains exact versions of installed packages.
-- **package.json**: Contains metadata about the project and its dependencies.
-- **playwright.config.ts**: Configuration file for Playwright tests.
-- **README.md**: Project documentation.
-- **stylelint.config.cjs**: Configuration file for Stylelint.
-- **tsconfig.json**: TypeScript configuration file.
-- **env.d.ts**: Type declaration file for environment variables.
+#### 🟦 1. Mit GitHub Desktop (empfohlen für Einsteiger)
 
+1. [GitHub Desktop installieren](https://desktop.github.com/)
+2. Öffne die App → `File` → `Clone repository`
+3. Gib ein oder wähle das Repository: `https://github.com/momoking01/projektarbeitgithub1.git`
+4. Zielordner wählen → `Clone` klicken  
+5. Öffne das Projekt in deinem Editor (z. B. VS Code)
 
+---
 
+#### 💻 2. Mit Git CLI (für Terminal-Nutzer)
 
-## 🧞 Commands
+```bash
+git clone https://github.com/momoking01/projektarbeitgithub1.git
+cd projektarbeitgithub1
+```
+---
 
-All commands are run from the root of the project, from a terminal:
+#### 🧠 3. Direkt in VS Code klonen
 
-| Command                           | Action                                           |
-| :----------------------------     | :----------------------------------------------- |
-| npm install                       | Installs dependencies                            |
-| npm install -g astro              | Installs dependencies global                     |
-| npm run dev                       | Starts local dev server at localhost:4321        |
-| npm run build                     | Build your production site to ./dist/            |
-| npm run preview                   | Preview your build locally, before deploying     |
-| npm run astro ...                 | Run CLI commands like astro add, astro check     |
-| npm run astro -- --help           | Get help using the Astro CLI                     |
-| npm install --save-dev            |                                                  |
-| eslint eslint-plugin-astro        | Installs EsLint                                  |
-| npm install --save-dev            |                                                  |
-| postcss-html stylelint-config-html| Installs StyleLint                               |
-| node scripts/convertImages.js     | optimize images                                  |
+1. Öffne VS Code → `Strg + Shift + P` → `Git: Clone`
+2. Gib die Repo-URL ein: `https://github.com/momoking01/projektarbeitgithub1.git`
+3. Zielordner wählen → Projekt wird geöffnet
 
+---
 
+#### 📦 4. ZIP-Download (ohne Git)
+1. Gehe zu [GitHub Repo](https://github.com/momoking01/projektarbeitgithub1.git/)
+2. Klicke auf `Code` → `Download ZIP`
+3. Entpacke die ZIP-Datei
+4. Öffne das Projekt z. B. in VS Code
+---
 
-| programm lokal testen                                                                | 
-| :----------------------------------------------------------------------------------- | 
-| npm run lint                                                                         | 
-| npx playwright install --with-deps --> (install playwright browser)                  | 
-| npm run test                                                                         |
-| npx playwright show-trace test-results/example-navigation-to-menu-chromium/trace.zip |
-| npx playwright test --ui                                                             |
+### 🔧 Projekt lokal starten (Frontend & Backend)
+
+#### 1️⃣ Abhängigkeiten installieren
+Öffne ein Terminal im Projektordner und führe aus:
+
+```bash
+npm install
+```
+
+#### 2️⃣ Frontend starten (Astro)
+```bash
+npm run dev
+```
+📍 Das Frontend ist jetzt erreichbar unter:
+👉 `http://localhost:4321`
+
+#### 3️⃣ Backend starten (Express.js Server)
+```bash
+npm run server
+```
+📍 Das Backend (API-Server) läuft dann auf:
+👉 `http://localhost:5000/orders` (wenn man lokal testet)
+
+---
+
+### 💾 Datenbank (Supabase)
+ Die Bestellungen werden in Supabase gespeichert, nicht lokal.
+ Die Verbindung erfolgt über den Key in server.js:
+
+```js
+const supabaseUrl = "https://swwfjdmfmomzfdktgupq.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
+```
+Diese Werte sind im server.js bereits richtig eingetragen ✅
 
 
+---
 
+### 🧪 Projekt testen
+```bash
+npm run lint                 # Linter ausführen
+npm run test                 # Playwright Tests starten
+npx playwright test --ui     # Test-UI öffnen
+npx playwright show-report   # Playwright Test Report
+```
+---
 
+### 🚀 Powershell-API Befehle
 
-powershell commands:
-
-post:
-Invoke-RestMethod -Uri "http://projektarbeitgithub1.onrender.com/orders" -Method Post -Headers @{"Content-Type"="application/json"} -Body '{
-  "date": "2025-03-19T12:00:00Z",
+Bestellung senden (POST)
+```bash
+Invoke-RestMethod -Uri "https://projektarbeitgithub1.onrender.com/orders" -Method Post -Headers @{"Content-Type"="application/json"} -Body '{
   "items": [
     { "name": "Pizza Margherita", "quantity": 2 },
     { "name": "Caesar Salad", "quantity": 1 }
   ],
   "payment": "cash"
 }'
+```
 
-
-
-alles Delete:
-Invoke-RestMethod -Uri "http://projektarbeitgithub1.onrender.com/orders" -Method Delete
-
-
-
-delete nach id:
-Invoke-RestMethod -Uri "http://projektarbeitgithub1.onrender.com/orders/1742487468395" -Method Delete
-
-
-
-put nach id:
-Invoke-RestMethod -Uri "http://projektarbeitgithub1.onrender.com/orders/1742487468395" -Method Put -Headers @{"Content-Type"="application/json"} -Body '{
-  "id": "1742487468395",
-  "date": "2025-03-20T16:17:48.395Z",
+Bestellung ändern (PUT)
+```bash
+Invoke-RestMethod -Uri "https://projektarbeitgithub1.onrender.com/orders/(ID ERSETZEN)" -Method Put -Headers @{"Content-Type"="application/json"} -Body '{
   "items": [
     { "name": "Pizza Margherita", "quantity": 3 },
     { "name": "Caesar Salad", "quantity": 2 }
   ],
   "payment": "sepa"
 }'
+```
+
+Alle löschen (DELETE)
+```bash
+Invoke-RestMethod -Uri "https://projektarbeitgithub1.onrender.com/orders" -Method Delete
+```
+
+Einzelne löschen (DELETE)
+```bash
+Invoke-RestMethod -Uri "https://projektarbeitgithub1.onrender.com/orders/(ID ERSETZEN)" -Method Delete
+```
+---
+
+### 💪 Hinweise
+
+- Projektart: Hochschulprojekt im Studiengang [praktische Informatik]
+- Zeitraum: Frühjahr 2025
+- Hinweis: Dieses Projekt wurde zu Demonstrations- und Lernzwecken erstellt.
+
+---
+
+### 🚜 Weiterführend
+
+- Supabase Setup-Doku: `https://supabase.com/docs`
+
+- Astro Deployment: `https://docs.astro.build/en/guides/deploy/github/`
+
+- Render Deployment (Node): `https://render.com/docs/deploy-node-express-app`
 
 
 
-# 🌐 View the Project Live: (https://momoking01.github.io/projektarbeitgithub1/)
-# 🌐 As admin log in (https://momoking01.github.io/projektarbeitgithub1/auth)
-# 🌐 orders on server (https://projektarbeitgithub1.onrender.com/orders)
+
 
