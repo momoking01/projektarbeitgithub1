@@ -33,7 +33,7 @@ const background = "/projektarbeitgithub1/menu-bg.png";
       orders.forEach((order, index) => {
         let li = document.createElement("li");
         li.classList.add("order-item");
-        li.innerHTML = `<strong>Order #${index + 1}</strong> - ${new Date(order.date).toLocaleString()} <br> <span class="order-payment">Payment: ${order.payment}</span>`;
+        li.innerHTML = `<strong>Order #${index + 1}</strong> - ${new Date(order.created_at).toLocaleString()} <br> <span class="order-payment">Payment: ${order.payment}</span>`;
 
         let itemsList = document.createElement("ul");
         itemsList.classList.add("order-items");

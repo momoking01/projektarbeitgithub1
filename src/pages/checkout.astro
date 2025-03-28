@@ -40,16 +40,16 @@ const background = Astro.url.pathname.includes('checkout')
 
 <script is:inline>
   function loadCartSummary() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let totalItems = document.getElementById("total-items");
-    let orderSummary = document.getElementById("order-summary");
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const totalItems = document.getElementById("total-items");
+    const orderSummary = document.getElementById("order-summary");
 
     let totalCount = 0;
     orderSummary.innerHTML = "";
 
     cart.forEach(item => {
       totalCount += item.quantity;
-      let li = document.createElement("li");
+      const li = document.createElement("li");
       li.textContent = `${item.name} (x${item.quantity})`;
       orderSummary.appendChild(li);
     });
@@ -58,16 +58,15 @@ const background = Astro.url.pathname.includes('checkout')
   }
 
   async function placeOrder() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
     if (cart.length === 0) {
       alert("Your cart is empty.");
       return;
     }
 
-    let paymentMethod = document.getElementById("payment-method").value;
+    const paymentMethod = document.getElementById("payment-method").value;
 
-    let newOrder = {
-      date: new Date().toISOString(),
+    const newOrder = {
       items: cart,
       payment: paymentMethod
     };

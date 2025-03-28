@@ -1,183 +1,121 @@
+// ✅ Supabase-Version deines Express-Servers
 import express from "express";
-import fs from "fs";
 import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
-import compression from 'compression';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { createClient } from "@supabase/supabase-js";
+import compression from "compression";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const ordersFile = path.join(__dirname, "orders.json");
+
+// ✅ Supabase Setup
+const supabaseUrl = "https://your-project.supabase.co"; // <-- Ersetzen
+const supabaseKey = "your-anon-key"; // <-- Ersetzen
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const allowedOrigins = [
-    "https://momoking01.github.io",
-    "https://projektarbeitgithub1.onrender.com",
-    "http://localhost:4321" // Lokales Testen erlauben
+  "https://momoking01.github.io",
+  "https://projektarbeitgithub1.onrender.com",
+  "http://localhost:4321",
 ];
 
 app.use(compression());
 app.use(express.json());
 app.use(
-    cors({
-        origin: function (origin, callback) {
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true);
-            } else {
-                callback(new Error("Not allowed by CORS"));
-            }
-        },
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        allowedHeaders: ["Content-Type"],
-    })
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
 );
 
-// Sicherstellen, dass orders.json existiert
-if (!fs.existsSync(ordersFile)) {
-    fs.writeFileSync(ordersFile, "[]", "utf8");
-    console.log("✅ Created missing orders.json file.");
-}
-
+// ✅ Startseite zum Testen
 app.get("/", (req, res) => {
-    res.send("Server is running! Access API at /orders");
+  res.send("Server is running with Supabase!");
 });
 
-
-// 📌 Bestellhistorie abrufen
-app.get("/orders", (req, res) => {
-    console.log("📥 GET request to /orders received");
-    fs.readFile(ordersFile, "utf8", (err, data) => {
-        if (err) {
-            console.error("❌ Error reading orders file:", err);
-            return res.status(500).json({ error: "Error reading orders file." });
-        }
-        try {
-            console.log("📤 Sending orders data:", data);
-            res.json(JSON.parse(data || "[]"));
-        } catch (parseErr) {
-            console.error("❌ JSON Parse Error:", parseErr);
-            return res.status(500).json({ error: "Invalid JSON format in orders file." });
-        }
-    });
+// ✅ GET: Bestellungen abrufen
+app.get("/orders", async (req, res) => {
+  const { data, error } = await supabase.from("syrian-restaurant").select("*").order("created_at", { ascending: false });
+  if (error) {
+    console.error("❌ Error loading orders:", error.message);
+    return res.status(500).json({ error: "Could not load order history." });
+  }
+  res.json(data);
 });
 
-// 📌 Neue Bestellung speichern (mit Datum und ID)
-app.post("/orders", (req, res) => {
-    console.log("📥 POST request to /orders received with body:", req.body);
-    const newOrder = req.body;
+// ✅ POST: Neue Bestellung speichern
+app.post("/orders", async (req, res) => {
+  const newOrder = req.body;
 
-    if (!newOrder || !newOrder.items || newOrder.items.length === 0) {
-        console.error("❌ Invalid order format received:", req.body);
-        return res.status(400).json({ error: "Invalid order format." });
-    }
+  if (!newOrder || !newOrder.items || newOrder.items.length === 0) {
+    return res.status(400).json({ error: "Invalid order format." });
+  }
 
-    // Datum und ID hinzufügen
-    newOrder.date = new Date().toISOString();
-    newOrder.id = new Date().getTime().toString();  // Verwende Zeitstempel als ID
+  const { data, error } = await supabase
+  .from("syrian-restaurant")
+  .insert([{ 
+    ...newOrder, 
+    created_at: new Date().toISOString() 
+  }]);
 
-    fs.readFile(ordersFile, "utf8", (err, data) => {
-        let orders = [];
-        if (!err && data) {
-            try {
-                orders = JSON.parse(data || "[]");
-            } catch (parseErr) {
-                console.error("❌ JSON Parse Error:", parseErr);
-                return res.status(500).json({ error: "Invalid JSON format in orders file." });
-            }
-        }
-
-        orders.push(newOrder);
-
-        fs.writeFile(ordersFile, JSON.stringify(orders, null, 2), (err) => {
-            if (err) {
-                console.error("❌ Error saving order:", err);
-                return res.status(500).json({ error: "Error saving order." });
-            }
-            console.log("✅ New order saved:", newOrder);
-            res.json({ message: "Order saved successfully!" });
-        });
-    });
+  if (error) {
+    console.error("❌ Error saving order:", error.message);
+    return res.status(500).json({ error: "Error saving order." });
+  }
+  console.log("✅ Order saved to Supabase:", data);
+  res.json({ message: "Order saved successfully!" });
 });
 
-
-// 📌 Alle Bestellungen löschen (DELETE)
-app.delete("/orders", (req, res) => {
-    fs.writeFile(ordersFile, "[]", "utf8", (err) => {
-        if (err) {
-            console.error("❌ Error clearing orders:", err);
-            return res.status(500).json({ error: "Error clearing orders." });
-        }
-        console.log("✅ All orders have been deleted.");
-        res.json({ message: "All orders have been deleted." });
-    });
+// ✅ DELETE: Alle Bestellungen löschen
+app.delete("/orders", async (req, res) => {
+  const { error } = await supabase.from("syrian-restaurant").delete().neq("id", -1);
+  if (error) {
+    console.error("❌ Error clearing orders:", error.message);
+    return res.status(500).json({ error: "Error clearing orders." });
+  }
+  res.json({ message: "All orders have been deleted." });
 });
 
-// 📌 Bestellhistorie löschen (DELETE) nach ID
-app.delete("/orders/:id", (req, res) => {
-    const orderId = req.params.id;
-
-    fs.readFile(ordersFile, "utf8", (err, data) => {
-        if (err) {
-            console.error("❌ Error reading orders file:", err);
-            return res.status(500).json({ error: "Error reading orders file." });
-        }
-
-        let orders = JSON.parse(data || "[]");
-        orders = orders.filter(order => order.id !== orderId); // Bestellung mit der angegebenen ID entfernen
-
-        fs.writeFile(ordersFile, JSON.stringify(orders, null, 2), (err) => {
-            if (err) {
-                console.error("❌ Error saving orders:", err);
-                return res.status(500).json({ error: "Error saving orders." });
-            }
-            console.log(`✅ Order with ID ${orderId} deleted.`);
-            res.json({ message: `Order with ID ${orderId} deleted.` });
-        });
-    });
+// ✅ DELETE: Bestellung nach ID löschen
+app.delete("/orders/:id", async (req, res) => {
+  const { id } = req.params;
+  const { error } = await supabase.from("syrian-restaurant").delete().eq("id", id);
+  if (error) {
+    console.error("❌ Error deleting order:", error.message);
+    return res.status(500).json({ error: "Error deleting order." });
+  }
+  res.json({ message: `Order with ID ${id} deleted.` });
 });
 
-// 📌 Bestellung ändern (PUT) nach ID
-app.put("/orders/:id", (req, res) => {
-    const orderId = req.params.id;
-    const updatedOrder = req.body;
+// ✅ PUT: Bestellung aktualisieren
+app.put("/orders/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedOrder = req.body;
 
-    if (!updatedOrder || !updatedOrder.items || updatedOrder.items.length === 0) {
-        console.error("❌ Invalid order format received:", updatedOrder);
-        return res.status(400).json({ error: "Invalid order format." });
-    }
+  if (!updatedOrder || !updatedOrder.items || updatedOrder.items.length === 0) {
+    return res.status(400).json({ error: "Invalid order format." });
+  }
 
-    updatedOrder.date = new Date().toISOString(); // Datum aktualisieren
+  const { error } = await supabase
+    .from("syrian-restaurant")
+    .update({ ...updatedOrder, created_at: new Date().toISOString() })
+    .eq("id", id);
 
-    fs.readFile(ordersFile, "utf8", (err, data) => {
-        if (err) {
-            console.error("❌ Error reading orders file:", err);
-            return res.status(500).json({ error: "Error reading orders file." });
-        }
+  if (error) {
+    console.error("❌ Error updating order:", error.message);
+    return res.status(500).json({ error: "Error updating order." });
+  }
 
-        let orders = JSON.parse(data || "[]");
-        const orderIndex = orders.findIndex(order => order.id === orderId);
-
-        if (orderIndex === -1) {
-            return res.status(404).json({ error: "Order not found." });
-        }
-
-        orders[orderIndex] = updatedOrder; // Bestellung aktualisieren
-
-        fs.writeFile(ordersFile, JSON.stringify(orders, null, 2), (err) => {
-            if (err) {
-                console.error("❌ Error saving orders:", err);
-                return res.status(500).json({ error: "Error saving orders." });
-            }
-            console.log(`✅ Order with ID ${orderId} updated.`);
-            res.json({ message: `Order with ID ${orderId} updated.` });
-        });
-    });
+  res.json({ message: `Order with ID ${id} updated.` });
 });
 
-// 📌 Server starten
+// ✅ Start Server
 app.listen(PORT, () => {
-    console.log(`✅ Server running on http://localhost:${PORT}`);
-    console.log(`✅ API is available at http://localhost:${PORT}/orders`);
+  console.log(`🚀 Supabase Server running at http://localhost:${PORT}`);
 });
