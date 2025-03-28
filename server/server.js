@@ -1,7 +1,7 @@
 // ✅ Supabase-Version deines Express-Servers
 import express from "express";
 import cors from "cors";
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@supabase/supabase-js"; 
 import compression from "compression";
 
 const app = express();
