@@ -1,15 +1,15 @@
 // ✅ Supabase-Version deines Express-Servers
 import express from "express";
 import cors from "cors";
-import { createClient } from "@supabase/supabase-js"; 
+import { createClient } from "@supabase/supabase-js";
 import compression from "compression";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ✅ Supabase Setup
-const supabaseUrl = "https://your-project.supabase.co"; // <-- Ersetzen
-const supabaseKey = "your-anon-key"; // <-- Ersetzen
+const supabaseUrl = "https://swwfjdmfmomzfdktgupq.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3d2ZqZG1mbW9temZka3RndXBxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxMjYzNzMsImV4cCI6MjA1ODcwMjM3M30.kLnL6QSFo2vRE6qETsoSs7O6fCVZ-qr1udhOpLHSD7w";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const allowedOrigins = [
@@ -58,11 +58,11 @@ app.post("/orders", async (req, res) => {
   }
 
   const { data, error } = await supabase
-  .from("syrian-restaurant")
-  .insert([{ 
-    ...newOrder, 
-    created_at: new Date().toISOString() 
-  }]);
+    .from("syrian-restaurant")
+    .insert([{ 
+      ...newOrder, 
+      created_at: new Date().toISOString() 
+    }]);
 
   if (error) {
     console.error("❌ Error saving order:", error.message);
